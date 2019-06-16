@@ -4,7 +4,19 @@ import Home from "./views/Home.vue";
 
 Vue.use(Router);
 
-export default new Router({
+const authGuard = (to, from, next) => {
+  const loggedIn = localStorage.getItem("jwt");
+  if (loggedIn) {
+    //which means that it have the jwt at local storage
+    // Here it suppose to call for all the info of the local storage and put it on the Store service.
+    next();
+  } else {
+    //Should go to the login view.
+    next("/login");
+  }
+}
+
+const Rout = new Router({
   routes: [
     {
       path: "/",
@@ -17,8 +29,11 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
+      beforeEnter: authGuard,
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+        import(/* webpackChunkName: "about" */ "./views/About.vue")        
     }
   ]
 });
+
+export default Rout;
