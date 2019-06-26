@@ -1,5 +1,6 @@
 <template>
-  <sidebar-menu :menu="menu"/>
+  <!-- <sidebar-menu :menu="menu"/> -->
+  <div class="w-1/4 bg-black h-screen shadow-md"></div>
 </template>
 
 <script>
@@ -10,6 +11,7 @@ export default {
   },
   data() {
     return {
+      collapsed: false,
       menu: [
         {
           header: true,
@@ -21,8 +23,8 @@ export default {
         },
         {
           href: "/",
-          title: "Dashboard",
-          icon: "fa fa-user"
+          title: "Dashboard"
+          // icon: "fa fa-user"
           /* 
                         // custom icon
                         icon: {
@@ -46,7 +48,7 @@ export default {
         },
         {
           title: "Charts",
-          icon: "fa fa-chart-area",
+          // icon: "fa fa-chart-area",
           child: [
             {
               href: "/charts/sublink",

@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+// import Home from "./views/Home.vue";
+import Login from "./views/Login/Login.vue";
+import Sessions from "./views/Sessions/Sessions.vue";
 
 Vue.use(Router);
 
@@ -19,9 +21,14 @@ const authGuard = (to, from, next) => {
 const Rout = new Router({
   routes: [
     {
+      path: "/login",
+      name: "login",
+      component: Login
+    },
+    {
       path: "/",
       name: "home",
-      component: Home
+      component: Sessions
     },
     {
       path: "/about",
@@ -31,7 +38,7 @@ const Rout = new Router({
       // which is lazy-loaded when the route is visited.
       beforeEnter: authGuard,
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")        
+        import(/* webpackChunkName: "about" */ "./views/About.vue")
     }
   ]
 });
