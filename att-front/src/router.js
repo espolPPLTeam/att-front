@@ -3,6 +3,7 @@ import Router from "vue-router";
 // import Home from "./views/Home.vue";
 import Login from "./views/Login/Login.vue";
 import Sessions from "./views/Sessions/Sessions.vue";
+import TimeLineQuestion from "./views/TimelineQuestion/TimelineQuestion.vue";
 
 Vue.use(Router);
 
@@ -29,6 +30,11 @@ const Rout = new Router({
       path: "/",
       name: "home",
       component: Sessions
+    },
+    {
+      path: "/session/:sessionId",
+      name: "Preguntas",
+      component: TimeLineQuestion
     },
     {
       path: "/about",

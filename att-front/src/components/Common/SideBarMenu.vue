@@ -1,6 +1,6 @@
 <template>
   <!-- <sidebar-menu :menu="menu"/> -->
-  <div class="w-1/4 bg-black h-screen shadow-md"></div>
+  <div class="w-1/4 bg-black h-full shadow-md"></div>
 </template>
 
 <script>

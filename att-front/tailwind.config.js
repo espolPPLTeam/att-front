@@ -605,6 +605,7 @@ module.exports = {
     '4xl': '90rem',
     '5xl': '100rem',
     'full': '100%',
+    '17/20': '85%'
   },
 
 
@@ -625,6 +626,8 @@ module.exports = {
   maxHeight: {
     'full': '100%',
     'screen': '100vh',
+    '12': '3em',
+    '16': '4em',
   },
 
 

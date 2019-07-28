@@ -1,9 +1,11 @@
 <template>
-  <div>
+  <div class="relative h-screen">
     <Header/>
-    <div class="flex pt-12">
+    <div class="flex pt-12 h-full">
       <SideBarMenu/>
-      <slot></slot>
+      <div class="w-full h-full">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
