@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-// import ModuleExample from "./module-example";
+import user from "./user";
 
 Vue.use(Vuex);
 
@@ -12,11 +12,8 @@ Vue.use(Vuex);
 
 export default function(/* { ssrContext } */) {
   const Store = new Vuex.Store({
-    state: {
-      a: 1
-    },
     modules: {
-      // ModuleExample
+      user
     },
 
     // enable strict mode (adds overhead!)
