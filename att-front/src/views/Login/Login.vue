@@ -9,16 +9,18 @@
       <div class="flex flex-col justify-center items-center">
         <div class="flex justify-center my-4">
           <Label text="Usuario: " v-if="!mobile"/>
-          <Input title="Usuario" placeholder="Usuario"/>
+          <Input title="Usuario" placeholder="Usuario" v-model="email"/>
         </div>
         <div class="flex justify-center my-4">
           <Label text="Password: " v-if="!mobile"/>
-          <Input title="password" placeholder="****"/>
+          <Input title="password" placeholder="****" type="password" v-model="clave"/>
         </div>
       </div>
       <button
         class="btn btn-blue mx-auto mt-4"
         :class="{ 'w-1/2 ': mobile, 'w-1/3': !mobile }"
+        @click="login"
+        :disabled="disabled"
       >Iniciar sessión</button>
       <div
         class="text-grey-dark text-sm mt-4 hover:text-grey-darker text-center mr-4 cursor-pointer hover:text-underline font-bold"
@@ -38,17 +40,43 @@ export default {
   },
   data() {
     return {
-      mobile: false
+      mobile: true,
+      email: "",
+      clave: "",
+      loading: false
     };
   },
   computed: {
     pruebas() {
       return this.mobile ? " w-full " : " w-1/3 ";
+    },
+    invalidData() {
+      return (
+        !this.email || this.email == "" ||
+        !this.clave || this.clave == ""
+      );
+    },
+    disabled() {
+      return this.loading || this.invalidData;
     }
   },
   methods: {
     prueba: () => {
       console.log("hola mundo :D");
+    },
+    login() {
+      this.loading = true;
+      const payload = {
+        email: this.email,
+        clave: this.clave
+      };
+      this.$store.dispatch("user/login", payload)
+        .then(() => {
+          this.loading = false;
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 };

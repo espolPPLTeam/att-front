@@ -4,7 +4,9 @@
     :class="{width}"
     :value="this.value"
     :placeholder="this.placeholder"
-    @change="this.change"
+    @input="onInputChange($event.target.value)"
+    :type="type"
+    :disabled="disabled"
   >
 </template>
 
@@ -15,11 +17,27 @@ export default {
     placeholder: String,
     value: String,
     change: Function,
-    width: String
+    width: String,
+    type: {
+      type: String,
+      default: "text",
+      description: "Type of the input element"
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
+      description: "Controls if the input element is disabled"
+    }
   },
   computed: {
     hasClass() {
       this.width ? this.width : "w-2/3";
+    },
+  },
+  methods: {
+    /** Para hacer el 2-way data binding usando v-model */
+    onInputChange(value) {
+      this.$emit("input", value);
     }
   }
 };
