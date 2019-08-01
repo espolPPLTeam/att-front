@@ -20,7 +20,7 @@ const UserService = {
     };
     try {
       const response = await ApiServcie.postApi(url, payloadData);
-      //ApiServcie.setHeaderAuth(response.body.data.token);
+      ApiServcie.setHeader("x-access-token",response.body.data.token);
       TokenService.saveToken(response.body.data.token);
       return Promise.resolve(response.body.data);
     } catch(error) {

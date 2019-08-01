@@ -1,3 +1,8 @@
 export default {
-  loggedIn: false
+  loggedIn: false,
+  id: 0,
+  email: "",
+  rolId: 0,
+  rol: "",
+  paralelos: []
 };
