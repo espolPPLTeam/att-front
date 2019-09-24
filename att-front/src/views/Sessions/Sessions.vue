@@ -6,7 +6,7 @@
         Si ve este mensaje es porque no tiene sessiones o se están cargando x.x
       </div>
       <div v-if="!isEmpty">
-        <SessionList/>
+          <SessionList/>
       </div>
     </div>
   </Layout>
