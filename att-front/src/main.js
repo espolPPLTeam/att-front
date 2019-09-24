@@ -10,11 +10,13 @@ import "./plugins/vueResource";
 import '@/assets/css/tailwind.css';
 import 'vue-sidebar-menu/dist/vue-sidebar-menu.css';
 import "./style.css";
+import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount("#app");
