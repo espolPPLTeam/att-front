@@ -2,7 +2,7 @@
   <div
     class="min-h-4 bg-white border-b border-grey-lighter relative"
     :class="{'cursor-pointer hover:shadow-inner': this.state !== 'terminated'}"
-    v-on:click="prueba"
+    v-on:click="goToQuestion"
   >
     <div class="min-h-4 flex justify-start">
       <div
@@ -27,13 +27,13 @@ export default {
     type: String,
     message: String,
     state: String,
-    date: String
+    date: String,
+    id: String
   },
   methods: {
-    prueba() {
+    goToQuestion() {
       if (this.state === "onSession") {
-        const sessionId = 123;
-        this.$router.push({ path: `session/${sessionId}` });
+        this.$router.push({ path: `session/${this.id}` });
       }
     }
   }

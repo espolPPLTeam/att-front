@@ -5,6 +5,7 @@ import Router from "vue-router";
 import Login from "../views/Login/Login.vue";
 import Sessions from "../views/Sessions/Sessions.vue";
 import TimeLineQuestion from "../views/TimelineQuestion/TimelineQuestion.vue";
+import TimelineAnswer from "./views/TimelineAnswer/TimelineAnswer.vue";
 
 import AuthGuard from "./authGuards";
 
@@ -29,6 +30,14 @@ const Rout = new Router({
       path: "/session/:sessionId",
       name: "preguntas",
       component: TimeLineQuestion,
+      meta: {
+        requiresLogin: true
+      },
+    },
+    {
+      path: "/question/:questionId",
+      name: "Respuestas",
+      component: TimelineAnswer,
       meta: {
         requiresLogin: true
       },
