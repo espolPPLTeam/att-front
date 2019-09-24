@@ -7,7 +7,7 @@ const TOKEN_KEY = 'x-access-token';
  * Current implementation stores to localStorage. Local Storage should always be
  * accessed through this instance.
 **/
-const TokenService = {
+const StorageService = {
   getToken() {
     return localStorage.getItem(TOKEN_KEY);
   },
@@ -22,4 +22,4 @@ const TokenService = {
 
 };
 
-export { TokenService };
+export default StorageService;

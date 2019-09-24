@@ -23,3 +23,14 @@ export async function login({ commit }, payload) {
     });
 }
 
+export async function getDatosUsuario({ commit }) {
+  try {
+    const data = await UserService.getDatosUsuario();
+    commit("setLoggedIn", true);
+    commit("setUsuario", data);
+    return Promise.resolve(true);
+  } catch (error) {
+    commit("setLoggedIn", false);
+    return Promise.reject(error);
+  }
+}

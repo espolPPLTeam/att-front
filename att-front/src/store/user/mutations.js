@@ -18,6 +18,8 @@ export function setUsuario(state, usuario) {
   state.email = usuario.email;
   state.rolId = usuario.rolId;
   state.rol = usuario.rol.nombre;
+  state.nombres = usuario.nombres;
+  state.apellidos = usuario.apellidos;
   state.paralelos = usuario.paralelos.map((paralelo) => {
     return {
       codigo: paralelo.codigo,

@@ -73,6 +73,7 @@ export default {
       this.$store.dispatch("user/login", payload)
         .then(() => {
           this.loading = false;
+          this.$router.push({ name: "home" });
         })
         .catch(() => {
           this.loading = false;

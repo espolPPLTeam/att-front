@@ -1,7 +1,7 @@
 import { routes, BASE_URL } from "./routes";
 
-import ApiServcie from "./api.service";
-import { TokenService } from "./localStorage.service";
+import ApiService from "./api.service";
+import StorageService from "./localStorage.service";
 
 const UserService = {
 
@@ -19,9 +19,22 @@ const UserService = {
       clave: payload.clave,
     };
     try {
-      const response = await ApiServcie.postApi(url, payloadData);
-      ApiServcie.setHeader("x-access-token",response.body.data.token);
-      TokenService.saveToken(response.body.data.token);
+      const response = await ApiService.postApi(url, payloadData);
+      ApiService.setHeader("x-access-token",response.body.data.token);
+      StorageService.saveToken(response.body.data.token);
+      return Promise.resolve(response.body.data);
+    } catch(error) {
+      return Promise.reject(error);
+    }
+  },
+
+  /**
+   * Request HTTP hacia API de login
+   */
+  async getDatosUsuario() {
+    const url = BASE_URL + routes.GET_DATOS_USUARIO;
+    try {
+      const response = await ApiService.postApi(url);
       return Promise.resolve(response.body.data);
     } catch(error) {
       return Promise.reject(error);
