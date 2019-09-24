@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-4 bg-white border-b border-grey-lighter relative flex flex-col justify-between">
-    <div class="min-h-4 flex justify-start flex-col items-start max-w-17/20">
+    <div class="flex justify-start flex-col items-start max-w-17/20">
       <div class="my-2 ml-4 text-lg capitalize">{{this.title}}</div>
       <div
         class="ml-4 text-xs capitalize text-justify max-h-16 flex-wrap overflow-y-auto py-1 px-4"
@@ -10,6 +10,7 @@
     <div class="flex justify-end text-xs mr-2 text-grey-dark flex-col">
       <div
         class="flex justify-end mr-2 text-blue-light hover:text-blue-dark cursor-pointer mb-1"
+        v-on:click="goToAnswers"
       >Ver las ({{this.answers}}) respuesta(s)</div>
       <div class="flex justify-end mr-2 mb-1">{{this.date}}</div>
     </div>
@@ -29,7 +30,14 @@ export default {
     message: String,
     state: String,
     date: String,
-    answers: String
+    answers: String,
+    id: String
+  },
+  methods: {
+    goToAnswers() {
+      const sessionId = 123;
+      this.$router.push({ path: `/question/${this.id}` });
+    }
   }
 };
 </script>
