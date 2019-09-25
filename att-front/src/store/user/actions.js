@@ -18,7 +18,13 @@ export async function login({ commit }, payload) {
       return Promise.resolve(true);
     })
     .catch((error) => {
+      console.log(error)
     	commit("setLoggedIn", false);
+      const errorPayload = {
+        isActive: true,
+        message: error.error
+      };
+      commit("app/setError", errorPayload, { root: true });
       return Promise.reject(error);
     });
 }

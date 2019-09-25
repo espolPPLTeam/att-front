@@ -24,7 +24,7 @@ const UserService = {
       StorageService.saveToken(response.body.data.token);
       return Promise.resolve(response.body.data);
     } catch(error) {
-      return Promise.reject(error);
+      return Promise.reject(error.body);
     }
   },
 
