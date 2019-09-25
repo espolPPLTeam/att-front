@@ -1,32 +1,40 @@
 <template>
-  <div class="w-full flex h-screen" :class="{ 'flex-col': mobile }">
-    <div class="bg-black relative" :class="{ 'w-full h-24': mobile, 'w-2/3': !mobile }"></div>
-    <div
-      :class="{ 'w-full': mobile, 'w-1/3': !mobile }"
-      class="bg-white relative my-auto flex flex-col justify-center"
-    >
-      <div class="text-lg text-gray-dark font-bold mb-8">Iniciar Sesión</div>
-      <div class="flex flex-col justify-center items-center">
-        <div class="flex justify-center my-4">
-          <Label text="Usuario: " v-if="!mobile"/>
-          <Input title="Usuario" placeholder="Usuario" v-model="email"/>
-        </div>
-        <div class="flex justify-center my-4">
-          <Label text="Password: " v-if="!mobile"/>
-          <Input title="password" placeholder="****" type="password" v-model="clave"/>
-        </div>
-      </div>
-      <button
-        class="btn btn-blue mx-auto mt-4"
-        :class="{ 'w-1/2 ': mobile, 'w-1/3': !mobile }"
-        @click="login"
-        :disabled="disabled"
-      >Iniciar sessión</button>
-      <div
-        class="text-grey-dark text-sm mt-4 hover:text-grey-darker text-center mr-4 cursor-pointer hover:text-underline font-bold"
-      >¿Olvidaste tu contraseña?</div>
-    </div>
-  </div>
+  <v-container class="fill-height" fluid>
+    <v-row align="center" justify="center">
+      <v-col cols="12" sm="8" md="4">
+        <v-card class="elevation-12">
+          <v-toolbar color="primary" dark flat>
+            <v-toolbar-title>Login</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <v-form>
+              <v-text-field
+                v-model="email"
+                label="Login"
+                name="login"
+                type="text"
+              ></v-text-field>
+              <v-text-field
+                id="password"
+                v-model="clave"
+                label="Password"
+                name="password"
+                type="password"
+              ></v-text-field>
+            </v-form>
+          </v-card-text>
+          <v-card-actions>
+            <div class="flex-grow-1"></div>
+            <v-btn
+              color="primary"
+              :disabled="invalidData || loading"
+              :loading="loading"
+              @click="login">Iniciar Sesión</v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
@@ -47,9 +55,6 @@ export default {
     };
   },
   computed: {
-    pruebas() {
-      return this.mobile ? " w-full " : " w-1/3 ";
-    },
     invalidData() {
       return (
         !this.email || this.email == "" ||
@@ -61,9 +66,6 @@ export default {
     }
   },
   methods: {
-    prueba: () => {
-      console.log("hola mundo :D");
-    },
     login() {
       this.loading = true;
       const payload = {

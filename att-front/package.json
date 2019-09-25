@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@eriktoyra/vue-cli-plugin-tailwindcss": "^1.1.1",
+    "@mdi/font": "^4.4.95",
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
     "@vue/cli-plugin-pwa": "^3.8.0",
