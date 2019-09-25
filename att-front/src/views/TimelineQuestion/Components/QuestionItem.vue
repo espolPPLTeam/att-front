@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-4 bg-white border-b border-grey-lighter relative flex flex-col justify-between">
+  <!-- <div class="min-h-4 bg-white border-b border-grey-lighter relative flex flex-col justify-between">
     <div class="flex justify-start flex-col items-start max-w-17/20">
       <div class="my-2 ml-4 text-lg capitalize">{{this.title}}</div>
       <div
@@ -14,7 +14,16 @@
       >Ver las ({{this.answers}}) respuesta(s)</div>
       <div class="flex justify-end mr-2 mb-1">{{this.date}}</div>
     </div>
-  </div>
+  </div>-->
+  <v-card class="mx-auto my-1" v-on:click="goToQuestion" max-height="500">
+    <v-card-title>{{this.title}}</v-card-title>
+    <v-card-text>{{this.message}}</v-card-text>
+    <v-card-actions width="100%">
+      <v-flex class="justify-end" v-on:click="goToAnswers">
+        <v-btn text>Ver las ({{this.answers}}) respuesta(s)</v-btn>
+      </v-flex>
+    </v-card-actions>
+  </v-card>
 </template>
 
 <script>

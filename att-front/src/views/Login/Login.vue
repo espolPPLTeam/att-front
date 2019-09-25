@@ -8,12 +8,7 @@
           </v-toolbar>
           <v-card-text>
             <v-form>
-              <v-text-field
-                v-model="email"
-                label="Login"
-                name="login"
-                type="text"
-              ></v-text-field>
+              <v-text-field v-model="email" label="Login" name="login" type="text"></v-text-field>
               <v-text-field
                 id="password"
                 v-model="clave"
@@ -29,7 +24,8 @@
               color="primary"
               :disabled="invalidData || loading"
               :loading="loading"
-              @click="login">Iniciar Sesión</v-btn>
+              @click="login"
+            >Iniciar Sesión</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -56,10 +52,7 @@ export default {
   },
   computed: {
     invalidData() {
-      return (
-        !this.email || this.email == "" ||
-        !this.clave || this.clave == ""
-      );
+      return !this.email || this.email == "" || !this.clave || this.clave == "";
     },
     disabled() {
       return this.loading || this.invalidData;
@@ -72,7 +65,8 @@ export default {
         email: this.email,
         clave: this.clave
       };
-      this.$store.dispatch("user/login", payload)
+      this.$store
+        .dispatch("user/login", payload)
         .then(() => {
           this.loading = false;
           this.$router.push({ name: "home" });

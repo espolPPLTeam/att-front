@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="session in this.sessions">
+    <div v-for="(session, index) in this.sessions" :key="index">
       <SessionItem v-bind="session" />
     </div>
   </div>

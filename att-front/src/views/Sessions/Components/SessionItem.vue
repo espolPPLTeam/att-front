@@ -1,5 +1,5 @@
 <template>
-  <div
+  <!-- <div
     class="min-h-4 bg-white border-b border-grey-lighter relative"
     :class="{'cursor-pointer hover:shadow-inner': this.state !== 'terminated'}"
     v-on:click="goToQuestion"
@@ -11,7 +11,11 @@
       >{{this.message}}</div>
     </div>
     <div class="flex justify-end text-xs mr-2 text-grey-dark">{{this.date}}</div>
-  </div>
+  </div>-->
+  <v-card class="mx-auto my-1" v-on:click="goToQuestion">
+    <v-card-title>{{this.message}}</v-card-title>
+    <v-card-text>{{this.date}}</v-card-text>
+  </v-card>
 </template>
 
 <script>
