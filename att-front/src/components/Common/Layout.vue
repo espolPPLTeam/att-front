@@ -1,7 +1,6 @@
 <template>
   <v-app id="inspire">
     <SideBarMenu></SideBarMenu>
-
     <v-container class="fill-height" fluid>
       <slot></slot>
     </v-container>
@@ -26,15 +25,7 @@ export default {
   },
   data: () => ({
     drawer: null
-  }),
-  // created() {
-  //   this.$vuetify.theme.dark = true;
-  // },
-  methods: {
-    goToSession() {
-      this.$router.push({ path: `/` });
-    }
-  }
+  })
 };
 </script>
  <!--
