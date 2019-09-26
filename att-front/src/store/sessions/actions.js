@@ -7,7 +7,7 @@ import SessionService from "../../services/session.service";
 export async function getSessions({ commit }, payload) {
   return SessionService.getSessions(payload)
     .then(data => {
-      commit("setSessions", [data]);
+      commit("setSessions", data);
       return Promise.resolve(true);
     })
     .catch(error => {
@@ -36,15 +36,15 @@ export async function createSession({ commit }, payload) {
         name: payload.nombre,
         actualState: {
           id: 1,
-          name: "PENDIENTE",
+          name: "PENDIENTE"
         },
         course: {
           id: payload.course,
-          name: payload.courseName,
+          name: payload.courseName
         },
         subject: {
           id: payload.subject,
-          name: payload.subjectName,
+          name: payload.subjectName
         }
       };
       commit("addSession", sesionPayload);

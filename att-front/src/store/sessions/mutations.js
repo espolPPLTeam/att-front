@@ -1,21 +1,22 @@
 export function setSessions(state, sessions) {
   state.sessions = sessions.map(session => {
+    console.log(session);
     return {
       id: session.id,
       name: session.nombre,
       actualState: {
         id: session.estadoActual.id,
-        name: session.estadoActual.nombre,
+        name: session.estadoActual.nombre
       },
       course: {
         id: session.paralelo.id,
-        name: session.paralelo.nombre,
+        name: session.paralelo.nombre
       },
       subject: {
         id: session.paralelo.materia.id,
-        name: session.paralelo.materia.nombre,
-      },
-    }
+        name: session.paralelo.materia.nombre
+      }
+    };
   });
 }
 

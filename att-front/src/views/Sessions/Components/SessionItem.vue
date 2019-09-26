@@ -13,13 +13,20 @@
     <div class="flex justify-end text-xs mr-2 text-grey-dark">{{this.date}}</div>
   </div>-->
   <v-card class="mx-auto my-1" v-on:click="goToQuestion">
-    <v-card-title>{{this.nombre}}</v-card-title>
-    <v-card-text>{{this.date}}</v-card-text>
+    <div class="flex flex-row justify-between">
+      <v-card-title>{{this.name}}</v-card-title>
+      <SessionStatus :actualState="actualState"></SessionStatus>
+    </div>
+    <div class="flex flex-row justify-end">
+      <v-card-text>{{this.subject.name}}</v-card-text>
+      <v-card-text class="text-left">{{this.course.name}}</v-card-text>
+    </div>
   </v-card>
 </template>
 
 <script>
 import Router from "vue-router";
+import SessionStatus from "./SessionStatus";
 
 export default {
   data() {
@@ -27,12 +34,18 @@ export default {
       onSessionStyle: "text-blue"
     };
   },
+  components: {
+    SessionStatus
+  },
   props: {
     type: String,
-    nombre: String,
+    name: String,
     state: String,
     date: String,
-    id: [String, Number]
+    id: [String, Number],
+    course: Object,
+    subject: Object,
+    actualState: Object
   },
   methods: {
     goToQuestion() {
