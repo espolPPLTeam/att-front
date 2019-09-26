@@ -33,7 +33,7 @@ export async function createSession({ commit }, payload) {
     .then(data => {
       const sesionPayload = {
         id: data.id,
-        name: payload.nombre,
+        name: payload.name,
         actualState: {
           id: 1,
           name: "PENDIENTE"
