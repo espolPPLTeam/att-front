@@ -43,5 +43,3 @@ export default {
   }
 };
 </script>
-
-// :class="{ 'w-1/2 ': mobile, 'w-1/3': !mobile }

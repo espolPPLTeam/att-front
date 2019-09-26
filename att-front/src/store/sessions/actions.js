@@ -6,11 +6,11 @@ import SessionService from "../../services/session.service";
  */
 export async function getSessions({ commit }, payload) {
   return SessionService.getSessions(payload)
-    .then((data) => {
-      commit("setSessions", data);
+    .then(data => {
+      commit("setSessions", [data]);
       return Promise.resolve(true);
     })
-    .catch((error) => {
+    .catch(error => {
       const errorPayload = {
         isActive: true,
         message: error.error

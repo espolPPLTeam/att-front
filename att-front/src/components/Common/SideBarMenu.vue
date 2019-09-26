@@ -1,6 +1,20 @@
 <template>
-  <!-- <sidebar-menu :menu="menu"/> -->
-  <div class="w-1/4 bg-black h-full shadow-md"></div>
+  <div>
+    <v-navigation-drawer v-model="drawer" app clipped>
+      <v-list dense>
+        <v-list-item v-on:click="goToSession(course)" v-for="course in courses" :key="course.id">
+          <v-list-item-content>
+            <v-list-item-title class="text-x3">{{course.subjectName}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
+    </v-navigation-drawer>
+
+    <v-app-bar app clipped-left>
+      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title>Ask The Teacher</v-toolbar-title>
+    </v-app-bar>
+  </div>
 </template>
 
 <script>
@@ -9,55 +23,23 @@ export default {
   components: {
     SidebarMenu
   },
-  data() {
-    return {
-      collapsed: false,
-      menu: [
-        {
-          header: true,
-          title: "Main Navigation"
-          // component: componentName
-          // visibleOnCollapse: true
-          // class: ''
-          // attributes: {}
-        },
-        {
-          href: "/",
-          title: "Dashboard"
-          // icon: "fa fa-user"
-          /* 
-                        // custom icon
-                        icon: {
-                            element: 'span',
-                            class: 'fa fa-user',
-                            attributes: {}
-                        }
-                        */
-          // disabled: true
-          // class: ''
-          // attributes: {}
-          // alias: '/path'
-          /*
-                        badge: {
-                            text: 'new',
-                            class: 'default-badge'
-                            // attributes: {}
-                            // element: 'span'
-                        }
-                        */
-        },
-        {
-          title: "Charts",
-          // icon: "fa fa-chart-area",
-          child: [
-            {
-              href: "/charts/sublink",
-              title: "Sub Link"
-            }
-          ]
-        }
-      ]
-    };
+  computed: {
+    courses() {
+      return this.$store.getters["user/courses"];
+    }
+  },
+  data: () => ({
+    drawer: null
+  }),
+  methods: {
+    goToSession(course) {
+      // console.log("==== ", course.id);
+      this.$store.dispatch("sessions/getSessions", { paralelo: course.id });
+      this.$router.push({ path: `/` });
+    }
   }
+  // mounted() {
+  //   this.$store.dispatch("sessions/getCourses");
+  // }
 };
 </script>

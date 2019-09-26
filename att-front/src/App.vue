@@ -10,12 +10,15 @@
 <script>
 import Error from "./components/Common/Error.vue";
 export default {
-  name: 'App',
+  name: "App",
   data: () => ({
     //
   }),
-  components: {
-    Error,
+  created() {
+    this.$vuetify.theme.dark = true;
   },
+  components: {
+    Error
+  }
 };
 </script>
