@@ -4,7 +4,7 @@ export default {
   email: "",
   rolId: 0,
   rol: "",
-  paralelos: [],
+  courses: [],
   nombres: "",
   apellidos: "",
 };

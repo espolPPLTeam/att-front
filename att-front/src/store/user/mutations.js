@@ -20,11 +20,13 @@ export function setUsuario(state, usuario) {
   state.rol = usuario.rol.nombre;
   state.nombres = usuario.nombres;
   state.apellidos = usuario.apellidos;
-  state.paralelos = usuario.paralelos.map((paralelo) => {
+  state.courses = usuario.paralelos.map((paralelo) => {
     return {
-      codigo: paralelo.codigo,
+      code: paralelo.codigo,
       id: paralelo.id,
-      nombre: paralelo.nombre
+      name: paralelo.nombre,
+      subjectId: paralelo.materia.id,
+      subjectName: paralelo.materia.nombre,
     }
   });
 }
