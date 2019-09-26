@@ -8,12 +8,12 @@
       <div
         class="my-auto ml-4 text-lg capitalize"
         :class="{'text-grey-dark': this.state === 'terminated', 'text-blue': this.state === 'onSession'}"
-      >{{this.message}}</div>
+      >{{this.nombre}}</div>
     </div>
     <div class="flex justify-end text-xs mr-2 text-grey-dark">{{this.date}}</div>
   </div>-->
   <v-card class="mx-auto my-1" v-on:click="goToQuestion">
-    <v-card-title>{{this.message}}</v-card-title>
+    <v-card-title>{{this.nombre}}</v-card-title>
     <v-card-text>{{this.date}}</v-card-text>
   </v-card>
 </template>
@@ -29,7 +29,7 @@ export default {
   },
   props: {
     type: String,
-    message: String,
+    nombre: String,
     state: String,
     date: String,
     id: String

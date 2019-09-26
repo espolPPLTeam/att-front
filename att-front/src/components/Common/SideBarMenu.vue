@@ -19,6 +19,9 @@
 
 <script>
 import { SidebarMenu } from "vue-sidebar-menu";
+import isEmpty from "lodash/isEmpty";
+import first from "lodash/first";
+
 export default {
   components: {
     SidebarMenu
@@ -26,6 +29,9 @@ export default {
   computed: {
     courses() {
       return this.$store.getters["user/courses"];
+    },
+    sessions() {
+      return this.$store.getters["sessions/allSessions"];
     }
   },
   data: () => ({
@@ -33,13 +39,15 @@ export default {
   }),
   methods: {
     goToSession(course) {
-      // console.log("==== ", course.id);
       this.$store.dispatch("sessions/getSessions", { paralelo: course.id });
       this.$router.push({ path: `/` });
     }
+  },
+  mounted() {
+    if (!isEmpty(this.courses) && isEmpty(this.sessions)) {
+      const course = first(this.courses);
+      this.$store.dispatch("sessions/getSessions", { paralelo: course.id });
+    }
   }
-  // mounted() {
-  //   this.$store.dispatch("sessions/getCourses");
-  // }
 };
 </script>

@@ -6,7 +6,7 @@
         Si ve este mensaje es porque no tiene sessiones o se están cargando x.x
       </div>
       <div v-if="!isEmpty">
-        <SessionList />
+        <SessionList sessions />
       </div>
     </div>
   </Layout>
@@ -26,14 +26,6 @@ export default {
     Layout,
     SessionList
   },
-  computed: {
-    sessions() {
-      return this.$store.getters["sessions/sessions"];
-    },
-    user() {
-      return this.$store.getters["user/user"];
-    }
-  },
   methods: {
     /**
      * @param {object} session
@@ -51,12 +43,6 @@ export default {
      * @param {number} session.materia.id
      * @param {string} session.materia.nombre
      */
-    getSessions() {
-      this.$store.dispatch("sessions/getSessions");
-    }
-  },
-  mounted() {
-    this.getSessions();
   }
 };
 </script>
