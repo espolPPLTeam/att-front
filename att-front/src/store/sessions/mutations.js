@@ -1,5 +1,22 @@
 export function setSessions(state, sessions) {
-  state.sessions = sessions;
+  state.sessions = sessions.map(session => {
+    return {
+      id: session.id,
+      name: session.nombre,
+      actualState: {
+        id: session.estadoActual.id,
+        name: session.estadoActual.nombre,
+      },
+      course: {
+        id: payload.paralelo.id,
+        name: payload.paralelo.nombre,
+      },
+      subject: {
+        id: payload.paralelo.materia.id,
+        name: payload.paralelo.materia.nombre,
+      },
+    }
+  });
 }
 
 /**

@@ -4,5 +4,6 @@ export const routes = {
   //===== AUTHENTICATION =====//
   LOGIN: "/api/att/login",
   GET_DATOS_USUARIO: "/api/att/obtenerDatosUsuario",
-  GET_SESSIONS: "/api/att/sesiones"
+  GET_SESSIONS: "/api/att/sesiones",
+  CREATE_SESSION: "/api/att/crearSesion",
 };

@@ -19,3 +19,43 @@ export async function getSessions({ commit }, payload) {
       return Promise.reject(error);
     });
 }
+
+/**
+ * @param {Object} payload
+ * @param {string} payload.name Name of the session
+ * @param {number} payload.course
+ * @param {string} payload.courseName
+ * @param {number} payload.subject
+ * @param {string} payload.subjectName
+ */
+export async function createSession({ commit }, payload) {
+  return SessionService.createSession(payload)
+    .then(data => {
+      const sesionPayload = {
+        id: data.id,
+        name: payload.nombre,
+        actualState: {
+          id: 1,
+          name: "PENDIENTE",
+        },
+        course: {
+          id: payload.course,
+          name: payload.courseName,
+        },
+        subject: {
+          id: payload.subject,
+          name: payload.subjectName,
+        }
+      };
+      commit("addSession", sesionPayload);
+      return Promise.resolve(true);
+    })
+    .catch(error => {
+      const errorPayload = {
+        isActive: true,
+        message: error.error
+      };
+      commit("app/setError", errorPayload, { root: true });
+      return Promise.reject(error);
+    });
+}
