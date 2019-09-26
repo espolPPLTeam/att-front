@@ -8,12 +8,12 @@ export function setSessions(state, sessions) {
         name: session.estadoActual.nombre,
       },
       course: {
-        id: payload.paralelo.id,
-        name: payload.paralelo.nombre,
+        id: session.paralelo.id,
+        name: session.paralelo.nombre,
       },
       subject: {
-        id: payload.paralelo.materia.id,
-        name: payload.paralelo.materia.nombre,
+        id: session.paralelo.materia.id,
+        name: session.paralelo.materia.nombre,
       },
     }
   });

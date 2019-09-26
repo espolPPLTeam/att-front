@@ -32,7 +32,7 @@ export default {
     nombre: String,
     state: String,
     date: String,
-    id: String
+    id: [String, Number]
   },
   methods: {
     goToQuestion() {
