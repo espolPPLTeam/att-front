@@ -1,7 +1,7 @@
 
 <template>
   <div class="text-right">
-    <v-dialog v-model="dialog" width="500" persistent>
+    <v-dialog v-model="dialog" width="500" persistent v-if="user.rol === 'profesor' ">
       <template v-slot:activator="{ on }">
         <v-btn color="primary my-2" rounded @click="dialog = true">Nueva sesión</v-btn>
       </template>
@@ -44,6 +44,10 @@ export default {
         return { text: course.subjectName, value: course.id };
       });
       return cursos;
+    },
+    //rol
+    user() {
+      return this.$store.getters["user/user"];
     }
   },
   methods: {
