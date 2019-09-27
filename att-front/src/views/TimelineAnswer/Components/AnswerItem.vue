@@ -10,7 +10,7 @@
       <div class="flex justify-end mr-2 mb-1">{{this.date}}</div>
   </div>
   </div>-->
-  <v-card class="mx-auto my-1" v-on:click="goToQuestion" max-height="500">
+  <v-card class="mx-auto my-1" max-height="500">
     <v-card-text>{{this.message}}</v-card-text>
   </v-card>
 </template>

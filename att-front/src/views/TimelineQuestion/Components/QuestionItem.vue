@@ -1,5 +1,5 @@
 <template>
-  <v-card class="mx-auto my-1" v-on:click="goToQuestion" max-height="500">
+  <v-card class="mx-auto my-1" max-height="500">
     <v-card-title v-if="this.title">{{this.title}}</v-card-title>
     <v-card-text>{{this.message}}</v-card-text>
     <v-card-actions width="100%">
@@ -29,13 +29,13 @@ export default {
     state: String,
     date: String,
     responses: Array,
-    id: String,
+    id: [String, Number],
     hasReply: Boolean
   },
   methods: {
     goToAnswers() {
-      const sessionId = 123;
-      this.$router.push({ path: `/question/${this.id}` });
+      const sessionId = this.$route.params.sessionId;
+      this.$router.push({ path: `/question/${sessionId}/${this.id}` });
     }
   }
 };

@@ -3,7 +3,7 @@
     <form>
       <v-container no-gutters class="w-4/5">
         <v-row no-gutters>
-          <v-col sm="8" xs="8" md="8" v-if="user.rol === 'profesor' ">
+          <v-col sm="8" xs="8" md="8" v-if="user.rol === 'profesor' && this.hasTitle">
             <v-text-field v-model="title" outlined label="Título"></v-text-field>
           </v-col>
           <v-col sm="10" xs="10" md="9">
@@ -34,6 +34,9 @@ export default {
       return this.$store.getters["user/user"];
     }
   },
+  props: {
+    hasTitle: Boolean
+  },
   methods: {
     createQuestions() {
       if (this.$route.name === "preguntas") {
@@ -52,7 +55,12 @@ export default {
           this.$store.dispatch("questions/createStudentQuestion", payload);
         }
       } else {
-        console.log("Respuestas?");
+        const payload = {
+          question: this.$route.params.questionId,
+          message: this.question
+        };
+        this.$store.dispatch("questions/answerQuestion", payload);
+        this.$store.getters["questions/professorQuestions"];
       }
     }
   }

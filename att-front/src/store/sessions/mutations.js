@@ -1,6 +1,5 @@
 export function setSessions(state, sessions) {
   state.sessions = sessions.map(session => {
-    console.log(session);
     return {
       id: session.id,
       name: session.nombre,
@@ -58,7 +57,7 @@ export function updateSessionStatus(state, payload) {
   if (session) {
     session.actualState = {
       id: payload.status,
-      name: statusName,
+      name: statusName
     };
   }
 }

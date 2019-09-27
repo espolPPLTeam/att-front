@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-for="answer in this.answers">
+    <div v-for="answer in this.responses" :key="'answer-' + answer.id">
       <AnswerItem v-bind="answer" />
     </div>
   </div>
@@ -31,6 +31,9 @@ export default {
         }
       ]
     };
+  },
+  props: {
+    responses: Array
   },
   components: {
     AnswerItem

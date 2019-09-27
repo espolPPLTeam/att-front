@@ -35,7 +35,7 @@ const Rout = new Router({
       },
     },
     {
-      path: "/question/:questionId",
+      path: "/question/:sessionId/:questionId",
       name: "Respuestas",
       component: TimelineAnswer,
       meta: {
