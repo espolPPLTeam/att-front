@@ -45,4 +45,3 @@ export async function getDatosUsuario({ commit }) {
     return Promise.reject(error);
   }
 }
-yy;

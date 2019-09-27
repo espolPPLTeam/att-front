@@ -50,6 +50,10 @@ export function setStudentQuestions(state, questions) {
 }
 
 export function addStudentQuestion(state, question) {
+  const questionExists = state.studentQuestions.find(x => x.id === question.id);
+  if (questionExists) {
+    return true;
+  }
   state.studentQuestions.push({
     id: question.id,
     image: null,
@@ -65,6 +69,10 @@ export function addStudentQuestion(state, question) {
 }
 
 export function addProfessorQuestion(state, question) {
+  const questionExists = state.professorQuestions.find(x => x.id === question.id);
+  if (questionExists) {
+    return true;
+  }
   state.professorQuestions.push({
     id: question.id,
     image: null,
