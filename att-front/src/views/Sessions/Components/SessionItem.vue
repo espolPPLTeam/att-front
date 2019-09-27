@@ -55,17 +55,12 @@ export default {
   },
   methods: {
     getSessionData() {
-      this.$store.dispatch("sessions/getSessionById", { id: this.id });
-      if (this.state === "onSession") {
-        this.$router.push({ path: `session/${this.id}` });
-      }
-    },
-    getSessionData() {
       if (toLower(this.user.rol) === "profesor") {
+        this.$store.dispatch("sessions/getSessionById", { id: this.id });
         this.$router.push({ path: `session/${this.id}` });
-        return;
       }
       if (toLower(this.actualState.name) !== "pendiente") {
+        this.$store.dispatch("sessions/getSessionById", { id: this.id });
         this.$router.push({ path: `session/${this.id}` });
       }
     }

@@ -3,6 +3,7 @@
     <div v-for="(question,index) in this.questions " :key="index">
       <QuestionItem v-bind="question" />
     </div>
+    <div v-for="(question,index) in this.professorQuestions" :key="index">hola :D</div>
   </div>
 </template>
 
@@ -43,6 +44,14 @@ export default {
         }
       ]
     };
+  },
+  computed: {
+    professorQuestions() {
+      return this.$store.getters["questions/professorQuestions"];
+    },
+    studentQuestions() {
+      return this.$store.getters["questions/studentQuestions"];
+    }
   },
   components: {
     QuestionItem
