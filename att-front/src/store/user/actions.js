@@ -1,4 +1,5 @@
 import UserService from "../../services/user.service";
+import StorageService from "../../services/localStorage.service";
 
 /**
  * Loggea al usuario
@@ -13,6 +14,8 @@ import UserService from "../../services/user.service";
 export async function login({ commit }, payload) {
   return UserService.login(payload)
     .then((data) => {
+      const token = StorageService.getToken();
+      commit("sockets/createConnection", token, { root: true });
       commit("setLoggedIn", true);
       commit("setUsuario", data);
       return Promise.resolve(true);
@@ -32,6 +35,8 @@ export async function login({ commit }, payload) {
 export async function getDatosUsuario({ commit }) {
   try {
     const data = await UserService.getDatosUsuario();
+    const token = StorageService.getToken();
+    commit("sockets/createConnection", token, { root: true });
     commit("setLoggedIn", true);
     commit("setUsuario", data);
     return Promise.resolve(true);

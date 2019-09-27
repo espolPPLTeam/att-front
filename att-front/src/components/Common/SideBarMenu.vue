@@ -35,17 +35,27 @@ export default {
     }
   },
   data: () => ({
-    drawer: null
+    drawer: null,
+    previousCourse: null,
   }),
   methods: {
     goToSession(course) {
+      this.switchChatRooms(course);
       this.$store.dispatch("sessions/getSessions", { paralelo: course.id });
       this.$router.push({ path: `/` });
-    }
+    },
+    switchChatRooms(course) {
+      if (this.previousCourse) {
+        this.$store.commit("sockets/leaveChatRoom", this.previousCourse);
+      }
+      this.$store.commit("sockets/joinChatRoom", course.id);
+      this.previousCourse = course.id;
+    },
   },
   mounted() {
     if (!isEmpty(this.courses) && isEmpty(this.sessions)) {
       const course = first(this.courses);
+      this.switchChatRooms(course);
       this.$store.dispatch("sessions/getSessions", { paralelo: course.id });
     }
   }

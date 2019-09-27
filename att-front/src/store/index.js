@@ -5,6 +5,7 @@ import user from "./user";
 import app from "./app";
 import sessions from "./sessions";
 import questions from "./questions";
+import sockets from "./sockets";
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default function(/* { ssrContext } */) {
       app,
       sessions,
       questions,
+      sockets,
     },
 
     // enable strict mode (adds overhead!)
