@@ -20,6 +20,17 @@
     <div class="flex flex-row justify-end">
       <v-card-text>{{this.subject.name}}</v-card-text>
       <v-card-text class="text-left">{{this.course.name}}</v-card-text>
+      <v-btn
+        class="mx-2 mt-2"
+        v-if="actualState.name === 'PENDIENTE'"
+        @click.stop="startSession"
+      >Iniciar sesión</v-btn>
+      <v-btn
+        class="mx-2 mt-2"
+        v-if="actualState.name === 'ACTIVA'"
+        @click.stop="endSession"
+      >Acabar sesión</v-btn>
+      <!-- <v-card-text class="text-left">{{this.course.name}}</v-card-text> -->
     </div>
   </v-card>
 </template>
@@ -63,6 +74,13 @@ export default {
         this.$store.dispatch("sessions/getSessionById", { id: this.id });
         this.$router.push({ path: `session/${this.id}` });
       }
+    },
+    startSession() {
+      this.$store.dispatch("sessions/startSession", { id: this.id });
+      // startSession
+    },
+    endSession() {
+      this.$store.dispatch("sessions/endSession", { id: this.id });
     }
   }
 };
