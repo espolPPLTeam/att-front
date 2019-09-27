@@ -28,6 +28,8 @@
 import Router from "vue-router";
 import SessionStatus from "./SessionStatus";
 
+import toLower from "lodash/toLower";
+
 export default {
   data() {
     return {
@@ -37,10 +39,14 @@ export default {
   components: {
     SessionStatus
   },
+  computed: {
+    user() {
+      return this.$store.getters["user/user"];
+    }
+  },
   props: {
     type: String,
     name: String,
-    state: String,
     date: String,
     id: [String, Number],
     course: Object,
@@ -51,6 +57,15 @@ export default {
     getSessionData() {
       this.$store.dispatch("sessions/getSessionById", { id: this.id });
       if (this.state === "onSession") {
+        this.$router.push({ path: `session/${this.id}` });
+      }
+    },
+    getSessionData() {
+      if (toLower(this.user.rol) === "profesor") {
+        this.$router.push({ path: `session/${this.id}` });
+        return;
+      }
+      if (toLower(this.actualState.name) !== "pendiente") {
         this.$router.push({ path: `session/${this.id}` });
       }
     }
