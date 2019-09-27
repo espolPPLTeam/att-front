@@ -12,7 +12,7 @@
     </div>
     <div class="flex justify-end text-xs mr-2 text-grey-dark">{{this.date}}</div>
   </div>-->
-  <v-card class="mx-auto my-1" v-on:click="goToQuestion">
+  <v-card class="mx-auto my-1" v-on:click="getSessionData">
     <div class="flex flex-row justify-between">
       <v-card-title>{{this.name}}</v-card-title>
       <SessionStatus :actualState="actualState"></SessionStatus>
@@ -48,7 +48,8 @@ export default {
     actualState: Object
   },
   methods: {
-    goToQuestion() {
+    getSessionData() {
+      this.$store.dispatch("sessions/getSessionById", { id: this.id });
       if (this.state === "onSession") {
         this.$router.push({ path: `session/${this.id}` });
       }

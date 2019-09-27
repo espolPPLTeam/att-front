@@ -59,3 +59,23 @@ export async function createSession({ commit }, payload) {
       return Promise.reject(error);
     });
 }
+
+/**
+ * @param {Object} payload
+ * @param {number} payload.id Session ID
+ */
+export async function getSessionById({ commit }, payload) {
+  return SessionService.getSessionById(payload)
+    .then(data => {
+      commit("questions/setProfessorQuestions", data.preguntasProfesor, { root: true });
+      return Promise.resolve(true);
+    })
+    .catch(error => {
+      const errorPayload = {
+        isActive: true,
+        message: error.error
+      };
+      commit("app/setError", errorPayload, { root: true });
+      return Promise.reject(error);
+    });
+}

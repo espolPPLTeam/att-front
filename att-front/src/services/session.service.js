@@ -43,6 +43,24 @@ const SessionService = {
       return Promise.reject(error.body);
     }
   },
+  /**
+   * @param {Object} payload
+   * @param {number} payload.id
+   */
+  async getSessionById(payload) {
+    const url = BASE_URL + routes.GET_SESSION_BY_ID;
+    const queryData = {
+      params: {
+        idSesion: payload.id,
+      }
+    };
+    try {
+      const response = await ApiService.getApi(url, queryData);
+      return Promise.resolve(response.body.data);
+    } catch(error) {
+      return Promise.reject(error.body);
+    }
+  },
 };
 
 export default SessionService;
