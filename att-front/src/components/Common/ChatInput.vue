@@ -36,6 +36,12 @@ export default {
     createQuestions() {
       if (this.$route.name === "preguntas") {
         if (this.user.rol === "profesor") {
+          const payload = {
+            title: this.title,
+            message: this.question,
+            session: this.$route.params.sessionId,
+          };
+          this.$store.dispatch("questions/createStudentQuestion", payload);
           console.log("Pregunta del profeshooorrrr");
         } else {
           console.log("estudiante");
