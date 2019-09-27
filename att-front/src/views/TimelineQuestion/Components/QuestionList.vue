@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative max-h-3/5 overflow-y-auto scroll">
     <div v-for="(question) in this.professorQuestions" :key="'professor - ' + question.id">
       <QuestionItem v-bind="question" :hasReply="true" />
     </div>

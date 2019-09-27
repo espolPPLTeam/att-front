@@ -2,6 +2,11 @@
   <div>
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
+        <v-list-item @click="logout">
+          <v-list-item-content>
+            <v-list-item-title class="text-x3">Cerrar sesión</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item v-on:click="goToSession(course)" v-for="course in courses" :key="course.id">
           <v-list-item-content>
             <v-list-item-title class="text-x3">{{course.subjectName}}</v-list-item-title>
@@ -36,7 +41,7 @@ export default {
   },
   data: () => ({
     drawer: null,
-    previousCourse: null,
+    previousCourse: null
   }),
   methods: {
     goToSession(course) {
@@ -51,6 +56,9 @@ export default {
       this.$store.commit("sockets/joinChatRoom", course.id);
       this.previousCourse = course.id;
     },
+    logout() {
+      console.log("logout!");
+    }
   },
   mounted() {
     if (!isEmpty(this.courses) && isEmpty(this.sessions)) {

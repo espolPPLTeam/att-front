@@ -13,16 +13,16 @@ import StorageService from "../../services/localStorage.service";
  */
 export async function login({ commit }, payload) {
   return UserService.login(payload)
-    .then((data) => {
+    .then(data => {
       const token = StorageService.getToken();
       commit("sockets/createConnection", token, { root: true });
       commit("setLoggedIn", true);
       commit("setUsuario", data);
       return Promise.resolve(true);
     })
-    .catch((error) => {
-      console.log(error)
-    	commit("setLoggedIn", false);
+    .catch(error => {
+      console.log(error);
+      commit("setLoggedIn", false);
       const errorPayload = {
         isActive: true,
         message: error.error
@@ -45,3 +45,4 @@ export async function getDatosUsuario({ commit }) {
     return Promise.reject(error);
   }
 }
+yy;

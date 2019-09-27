@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="relative max-h-3/5 overflow-y-auto scroll">
     <div v-for="answer in this.responses" :key="'answer-' + answer.id">
       <AnswerItem v-bind="answer" />
     </div>

@@ -1,16 +1,17 @@
+
 <template>
-  <div class="fixed pin-b w-full bg-vuetify-dark ml-1">
+  <div class="fixed w-full pin-b mb-2">
     <form>
-      <v-container no-gutters class="w-4/5">
+      <v-container no-gutters>
         <v-row no-gutters>
-          <v-col sm="8" xs="8" md="8" v-if="user.rol === 'profesor' && this.hasTitle">
-            <v-text-field v-model="title" outlined label="Título"></v-text-field>
+          <v-col sm="12" xs="12" md="8" v-if="user.rol === 'profesor' && this.hasTitle">
+            <v-text-field v-model="title" class="mx-1" outlined label="Título"></v-text-field>
           </v-col>
-          <v-col sm="10" xs="10" md="9">
+          <v-col sm="12" xs="12" md="9" class="mx-1">
             <v-text-field v-model="question" outlined label="Pregunta"></v-text-field>
           </v-col>
-          <v-col sm="2" xs="2" md="2" class="justify-end mt-4 ml-4">
-            <v-btn text @click="createQuestions">Enviar</v-btn>
+          <v-col sm="12" xs="12" md="2" class="justify-end mt-2 ml-2">
+            <v-btn dark @click="createQuestions" color="primary">Enviar</v-btn>
           </v-col>
         </v-row>
       </v-container>
