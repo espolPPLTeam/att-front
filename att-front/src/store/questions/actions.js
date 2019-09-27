@@ -56,3 +56,30 @@ export async function createProfessorQuestion({ commit, rootState }, payload) {
     });
 }
 
+/**
+ * @param {Object} payload
+ * @param {number} payload.question
+ * @param {number} payload.message
+ */
+export async function answerQuestion({ commit, rootState }, payload) {
+  return QuestionService.answerQuestion(payload)
+    .then(data => {
+      const answerPayload = {
+        creador: rootState.user,
+        id: data.id,
+        texto: payload.message,
+        createdAt: data.createdAt,
+        question: payload.question,
+      };
+      commit("addAnswerToQuestion", answerPayload);
+      return Promise.resolve(true);
+    })
+    .catch(error => {
+      const errorPayload = {
+        isActive: true,
+        message: error.error
+      };
+      commit("app/setError", errorPayload, { root: true });
+      return Promise.reject(error);
+    });
+}

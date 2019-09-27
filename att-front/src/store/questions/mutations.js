@@ -80,3 +80,22 @@ export function addProfessorQuestion(state, question) {
     title: question.titulo
   });
 }
+
+export function addAnswerToQuestion(state, payload) {
+  const question = state.professorQuestions.find(question => question.id === payload.question);
+  if (question) {
+    question.responses.push({
+      id: payload.id,
+      image: null,
+      grade: null,
+      user: {
+        name: payload.creador.nombres,
+        lastName: payload.creador.apellidos,
+        email: payload.creador.email,
+        id: payload.creador.id,
+      },
+      createdAt: payload.createdAt,
+      message: payload.texto,
+    });
+  }
+}

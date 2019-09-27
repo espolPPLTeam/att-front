@@ -11,4 +11,5 @@ export const routes = {
   CREATE_PROFESSOR_QUESTION: "/api/att/crearPreguntaProfesor",
   START_SESSION: "/api/att/iniciarSesion",
   END_SESSION: "/api/att/terminarSesion",
+  ANSWER_QUESTION: "/api/att/responderPregunta",
 };

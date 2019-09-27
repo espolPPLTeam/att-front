@@ -41,6 +41,24 @@ const QuestionService = {
       return Promise.reject(error.body);
     }
   },
+  /**
+   * @param {Object} payload
+   * @param {number} payload.question Question ID
+   * @param {string} payload.message Text of the answer
+   */
+  async answerQuestion(payload) {
+    const url = BASE_URL + routes.ANSWER_QUESTION;
+    const payloadData = {
+      idPregunta: payload.question,
+      texto: payload.message,
+    };
+    try {
+      const response = await ApiService.postApi(url, payloadData);
+      return Promise.resolve(response.body.data);
+    } catch(error) {
+      return Promise.reject(error.body);
+    }
+  },
 };
 
 export default QuestionService;
