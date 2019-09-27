@@ -57,7 +57,8 @@ export default {
       this.previousCourse = course.id;
     },
     logout() {
-      console.log("logout!");
+      this.$store.dispatch("user/logout");
+      this.$router.push({ path: `/login` });
     }
   },
   mounted() {

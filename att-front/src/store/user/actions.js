@@ -45,3 +45,8 @@ export async function getDatosUsuario({ commit }) {
     return Promise.reject(error);
   }
 }
+
+export async function logout({ commit }) {
+  StorageService.removeToken();
+  commit("setLoggedIn", false);
+}
