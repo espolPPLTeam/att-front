@@ -15,7 +15,7 @@
   <v-card class="mx-auto my-1" v-on:click="getSessionData">
     <div class="flex flex-row justify-between">
       <v-card-title>{{this.name}}</v-card-title>
-      <SessionStatus :actualState="actualState"></SessionStatus>
+      <SessionStatus :actualState="actualState" :hasReply="true"></SessionStatus>
     </div>
     <div class="flex flex-row justify-end">
       <v-card-text>{{this.subject.name}}</v-card-text>
