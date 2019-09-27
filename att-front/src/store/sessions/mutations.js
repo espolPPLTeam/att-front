@@ -39,3 +39,26 @@ export function setSessions(state, sessions) {
 export function addSession(state, session) {
   state.sessions.push(session);
 }
+
+/**
+ * @param {object} payload
+ * @param {number} payload.status ID of the new status
+ * @param {number} payload.id Session ID
+ */
+export function updateSessionStatus(state, payload) {
+  let statusName = "";
+  if (payload.status === 1) {
+    statusName = "PENDIENTE";
+  } else if (payload.status === 2) {
+    statusName = "ACTIVA";
+  } else if (payload.status === 3) {
+    statusName = "TERMINADA";
+  }
+  const session = state.sessions.find(session => session.id === payload.id);
+  if (session) {
+    session.actualState = {
+      id: payload.status,
+      name: statusName,
+    };
+  }
+}

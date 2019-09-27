@@ -9,4 +9,6 @@ export const routes = {
   GET_SESSION_BY_ID: "/api/att/datosSesion",
   CREATE_STUDENT_QUESTION: "/api/att/crearPreguntaEstudiante",
   CREATE_PROFESSOR_QUESTION: "/api/att/crearPreguntaProfesor",
+  START_SESSION: "/api/att/iniciarSesion",
+  END_SESSION: "/api/att/terminarSesion",
 };

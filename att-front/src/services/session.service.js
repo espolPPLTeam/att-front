@@ -61,6 +61,38 @@ const SessionService = {
       return Promise.reject(error.body);
     }
   },
+  /**
+   * @param {Object} payload
+   * @param {string} payload.id
+   */
+  async startSession(payload) {
+    const url = BASE_URL + routes.START_SESSION;
+    const payloadData = {
+      idSesion: payload.id,
+    };
+    try {
+      const response = await ApiService.putApi(url, payloadData);
+      return Promise.resolve(response.body.data);
+    } catch(error) {
+      return Promise.reject(error.body);
+    }
+  },
+  /**
+   * @param {Object} payload
+   * @param {string} payload.id
+   */
+  async endSession(payload) {
+    const url = BASE_URL + routes.END_SESSION;
+    const payloadData = {
+      idSesion: payload.id,
+    };
+    try {
+      const response = await ApiService.putApi(url, payloadData);
+      return Promise.resolve(response.body.data);
+    } catch(error) {
+      return Promise.reject(error.body);
+    }
+  },
 };
 
 export default SessionService;

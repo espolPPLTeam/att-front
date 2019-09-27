@@ -80,3 +80,51 @@ export async function getSessionById({ commit }, payload) {
       return Promise.reject(error);
     });
 }
+
+/**
+ * @param {Object} payload
+ * @param {number} payload.id Session ID
+ */
+export async function startSession({ commit }, payload) {
+  return SessionService.startSession(payload)
+    .then(data => {
+      const statusPayload = {
+        id: payload.id,
+        status: data.estado_actual_id,
+      };
+      commit("updateSessionStatus", statusPayload);
+      return Promise.resolve(true);
+    })
+    .catch(error => {
+      const errorPayload = {
+        isActive: true,
+        message: error.error
+      };
+      commit("app/setError", errorPayload, { root: true });
+      return Promise.reject(error);
+    });
+}
+
+/**
+ * @param {Object} payload
+ * @param {number} payload.id Session ID
+ */
+export async function endSession({ commit }, payload) {
+  return SessionService.endSession(payload)
+    .then(data => {
+      const statusPayload = {
+        id: payload.id,
+        status: data.estado_actual_id,
+      };
+      commit("updateSessionStatus", statusPayload);
+      return Promise.resolve(true);
+    })
+    .catch(error => {
+      const errorPayload = {
+        isActive: true,
+        message: error.error
+      };
+      commit("app/setError", errorPayload, { root: true });
+      return Promise.reject(error);
+    });
+}
