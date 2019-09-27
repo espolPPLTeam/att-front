@@ -68,6 +68,7 @@ export async function getSessionById({ commit }, payload) {
   return SessionService.getSessionById(payload)
     .then(data => {
       commit("questions/setProfessorQuestions", data.preguntasProfesor, { root: true });
+      commit("questions/setStudentQuestions", data.preguntasEstudiante, { root: true });
       return Promise.resolve(true);
     })
     .catch(error => {
