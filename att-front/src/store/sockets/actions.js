@@ -75,3 +75,14 @@ export async function socket_updateProfessorQuestionStatus({ commit }, payload) 
     console.error(error);
   }
 }
+
+/**
+ * @param {Object} payload Student answer
+ */
+export async function socket_answerQuestion({ commit }, payload) {
+  try {
+    commit("questions/addAnswerToQuestion", payload, { root: true });
+  } catch(error) {
+    console.error(error);
+  }
+}
