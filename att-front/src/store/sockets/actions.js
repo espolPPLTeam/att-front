@@ -65,25 +65,13 @@ export async function socket_newStudentQuestion({ commit }, payload) {
 
 /**
  * @param {Object} payload Professor question
- * @param {number} payload.message
- * @param {number} payload.session ID of the session this question is for
+ * @param {number} payload.question ID of the question updated
+ * @param {string} payload.status New status of the question
  */
-export async function socket_newProfessorQuestion({ commit }, payload) {
+export async function socket_updateProfessorQuestionStatus({ commit }, payload) {
   try {
-    const questionPayload = {
-      creador: payload.user,
-      id: payload.id,
-      texto: payload.texto,
-      createdAt: payload.createdAt,
-      titulo: payload.titulo,
-    };
-    commit("questions/addProfessorQuestion", questionPayload, { root: true });
+    commit("questions/updateProfessorQuestionStatus", payload, { root: true });
   } catch(error) {
-    const errorPayload = {
-      isActive: true,
-      message: error.error
-    };
-    commit("app/setError", errorPayload, { root: true });
-    return Promise.reject(error);
+    console.error(error);
   }
 }

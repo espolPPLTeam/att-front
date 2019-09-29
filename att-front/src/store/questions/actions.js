@@ -90,6 +90,7 @@ export async function answerQuestion({ commit, rootState }, payload) {
 export async function updateProfessorQuestionStatus({ commit }, payload) {
   try {
     const data = await QuestionService.updateProfessorQuestionStatus(payload);
+    commit("updateProfessorQuestionStatus", payload);
     return Promise.resolve(true);
   } catch(error) {
     const errorPayload = {

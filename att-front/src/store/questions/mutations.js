@@ -110,6 +110,11 @@ export function addAnswerToQuestion(state, payload) {
   }
 }
 
+/**
+ * @param {object} payload Question data
+ * @param {number} payload.question ID of the question to update
+ * @param {string} payload.status New status of the question
+ */
 export function updateProfessorQuestionStatus(state, payload) {
   const question = state.professorQuestions.find(question => question.id === payload.question);
   if (question) {
