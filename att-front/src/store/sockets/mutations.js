@@ -14,15 +14,20 @@ export function createConnection (state, payload) {
   state.socket = Vue.prototype.$socket.client;
 }
 /**
- * Joins a chat room in the server. Used for sending & receiving socket messages
- * @param {string} payload Room ID. In this case is the selected course ID
+ * Joins a chat room in the server.
+ * @param {object} payload
+ * @param {number} payload.id Room ID. In this case is the selected course ID
+ * @param {string} payload.type Type of chat room to join COURSE | SESSION
  */
 export function joinChatRoom (state, payload) {
   state.socket.emit("joinChatRoom", payload);
 }
+
 /**
- * Leaves a chat room from the server. Used when leaving the chat component
- * @param {String} payloda Room ID. In this case is the selected booking ID
+ * Leaves a chat room from the server.
+ * @param {object} payload
+ * @param {number} payload.id Room ID. In this case is the selected course ID
+ * @param {string} payload.type Type of chat room to join COURSE | SESSION
  */
 export function leaveChatRoom (state, payload) {
   state.socket.emit("leaveChatRoom", payload);

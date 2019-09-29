@@ -50,10 +50,16 @@ export default {
       this.$router.push({ path: `/` });
     },
     switchChatRooms(course) {
+      const socketPayload = {
+        type: "COURSE",
+        id: "",
+      };
       if (this.previousCourse) {
-        this.$store.commit("sockets/leaveChatRoom", this.previousCourse);
+        socketPayload["id"] = this.previousCourse;
+        this.$store.commit("sockets/leaveChatRoom", socketPayload);
       }
-      this.$store.commit("sockets/joinChatRoom", course.id);
+      socketPayload["id"] = course.id;
+      this.$store.commit("sockets/joinChatRoom", socketPayload);
       this.previousCourse = course.id;
     },
     logout() {
