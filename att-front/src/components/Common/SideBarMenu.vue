@@ -63,6 +63,11 @@ export default {
       this.previousCourse = course.id;
     },
     logout() {
+      const socketPayload = {
+        type: "COURSE",
+        id: this.previousCourse,
+      };
+      this.$store.commit("sockets/leaveChatRoom", socketPayload);
       this.$store.dispatch("user/logout");
       this.$router.push({ path: `/login` });
     }
