@@ -27,6 +27,18 @@ export async function socket_sessionCreated({ commit }, payload) {
   }
 }
 
+export async function socket_updateSessionStatus({ commit }, payload) {
+  try {
+    const statusPayload = {
+      id: payload.id,
+      status: payload.status,
+    };
+    commit("sessions/updateSessionStatus", statusPayload, { root: true });
+  } catch(error) {
+    console.error(error);
+  }
+}
+
 /**
  * @param {Object} payload Student question
  * @param {number} payload.message
