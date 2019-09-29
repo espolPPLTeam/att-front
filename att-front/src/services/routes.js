@@ -12,4 +12,5 @@ export const routes = {
   START_SESSION: "/api/att/iniciarSesion",
   END_SESSION: "/api/att/terminarSesion",
   ANSWER_QUESTION: "/api/att/responderPregunta",
+  UPDATE_PROFESSOR_QUESTION_STATUS: "/api/att/professorQuestion/updateStatus",
 };

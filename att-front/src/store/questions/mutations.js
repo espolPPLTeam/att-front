@@ -5,6 +5,7 @@ export function setProfessorQuestions(state, questions) {
       image: question.imagen,
       message: question.texto,
       title: question.titulo,
+      status: question.estado,
       user: {
         name: question.creador.nombres,
         lastName: question.creador.apellidos,
@@ -77,6 +78,7 @@ export function addProfessorQuestion(state, question) {
     id: question.id,
     image: null,
     message: question.texto,
+    status: question.estado,
     user: {
       name: question.creador.nombres,
       lastName: question.creador.apellidos,
@@ -105,5 +107,12 @@ export function addAnswerToQuestion(state, payload) {
       createdAt: payload.createdAt,
       message: payload.texto,
     });
+  }
+}
+
+export function updateProfessorQuestionStatus(state, payload) {
+  const question = state.professorQuestions.find(question => question.id === payload.question);
+  if (question) {
+    question.status = payload.status;
   }
 }

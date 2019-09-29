@@ -59,6 +59,27 @@ const QuestionService = {
       return Promise.reject(error.body);
     }
   },
+  /**
+   * Updates the status of a question
+   * Starts or ends the question
+   *
+   * @param {Object} payload
+   * @param {number} payload.question Question ID
+   * @param {string} payload.status New status to update
+   */
+  async updateProfessorQuestionStatus(payload) {
+    const url = BASE_URL + routes.UPDATE_PROFESSOR_QUESTION_STATUS;
+    const payloadData = {
+      questionID: payload.question,
+      status: payload.status,
+    };
+    try {
+      const response = await ApiService.putApi(url, payloadData);
+      return Promise.resolve(response.body.data);
+    } catch(error) {
+      return Promise.reject(error.body);
+    }
+  },
 };
 
 export default QuestionService;

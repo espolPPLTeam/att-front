@@ -41,6 +41,7 @@ export async function createProfessorQuestion({ commit, rootState }, payload) {
       texto: payload.message,
       createdAt: data.createdAt,
       titulo: payload.title,
+      estado: "PENDIENTE",
     };
     commit("addProfessorQuestion", questionPayload);
     return Promise.resolve(true);
@@ -70,6 +71,25 @@ export async function answerQuestion({ commit, rootState }, payload) {
       question: payload.question,
     };
     commit("addAnswerToQuestion", answerPayload);
+    return Promise.resolve(true);
+  } catch(error) {
+    const errorPayload = {
+      isActive: true,
+      message: error.error
+    };
+    commit("app/setError", errorPayload, { root: true });
+    return Promise.reject(error);
+  }
+}
+
+/**
+ * @param {Object} payload
+ * @param {number} payload.question
+ * @param {number} payload.status
+ */
+export async function updateProfessorQuestionStatus({ commit }, payload) {
+  try {
+    const data = await QuestionService.updateProfessorQuestionStatus(payload);
     return Promise.resolve(true);
   } catch(error) {
     const errorPayload = {
