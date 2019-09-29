@@ -36,7 +36,10 @@ export function setSessions(state, sessions) {
  * @param {string} session.materia.nombre
  */
 export function addSession(state, session) {
-  state.sessions.push(session);
+  const sessionExists = state.sessions.find(x => x.id === session.id);
+  if (!sessionExists) {
+    state.sessions.push(session);
+  }
 }
 
 /**
