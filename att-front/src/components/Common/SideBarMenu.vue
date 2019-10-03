@@ -2,14 +2,24 @@
   <div>
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
+        <v-list-item two-line>
+          <v-list-item-avatar>
+            <img src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png">
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title class="text-x3">{{ user.nombres }} {{ user.apellidos }}</v-list-item-title>
+            <v-list-item-subtitle class="text-x3">{{ user.email }}</v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+        <v-divider></v-divider>
+        <v-list-item v-on:click="goToSession(course)" v-for="course in courses" :key="course.id">
+          <v-list-item-content>
+            <v-list-item-title class="text-x3">{{course.subjectName}} - {{ course.name }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list-item @click="logout">
           <v-list-item-content>
             <v-list-item-title class="text-x3">Cerrar sesión</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        <v-list-item v-on:click="goToSession(course)" v-for="course in courses" :key="course.id">
-          <v-list-item-content>
-            <v-list-item-title class="text-x3">{{course.subjectName}}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -37,6 +47,9 @@ export default {
     },
     sessions() {
       return this.$store.getters["sessions/allSessions"];
+    },
+    user() {
+      return this.$store.getters["user/user"];
     }
   },
   data: () => ({
