@@ -9,7 +9,7 @@ const QuestionService = {
    * @param {number} payload.session ID of the session this question is for
    */
   async createStudentQuestion(payload) {
-    const url = BASE_URL + routes.CREATE_STUDENT_QUESTION;
+    const url = BASE_URL + routes.API_ATT + routes.CREATE_STUDENT_QUESTION;
     const payloadData = {
       texto: payload.message,
       idSesion: payload.session,
@@ -28,7 +28,7 @@ const QuestionService = {
    * @param {number} payload.session ID of the session this question is for
    */
   async createProfessorQuestion(payload) {
-    const url = BASE_URL + routes.CREATE_PROFESSOR_QUESTION;
+    const url = BASE_URL + routes.API_ATT + routes.CREATE_PROFESSOR_QUESTION;
     const payloadData = {
       titulo: payload.title,
       texto: payload.message,
@@ -47,7 +47,7 @@ const QuestionService = {
    * @param {string} payload.message Text of the answer
    */
   async answerQuestion(payload) {
-    const url = BASE_URL + routes.ANSWER_QUESTION;
+    const url = BASE_URL + routes.API_ATT + routes.ANSWER_QUESTION;
     const payloadData = {
       idPregunta: payload.question,
       texto: payload.message,
@@ -68,7 +68,7 @@ const QuestionService = {
    * @param {string} payload.status New status to update
    */
   async updateProfessorQuestionStatus(payload) {
-    const url = BASE_URL + routes.UPDATE_PROFESSOR_QUESTION_STATUS;
+    const url = BASE_URL + routes.API_ATT + routes.UPDATE_PROFESSOR_QUESTION_STATUS;
     const payloadData = {
       questionID: payload.question,
       status: payload.status,

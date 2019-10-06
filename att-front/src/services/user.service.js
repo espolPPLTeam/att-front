@@ -6,14 +6,14 @@ import StorageService from "./localStorage.service";
 const UserService = {
 
   /**
-   * Request HTTP hacia API de login
+   * Makes the login post request to the server and sets the authentication token
    *
    * @param {Object} payload
-   * @param {String} payload.email Email del usuario
-   * @param {String} payload.clave Clave del usuario
+   * @param {String} payload.email
+   * @param {String} payload.clave
    */
   async login(payload) {
-    const url = BASE_URL + routes.LOGIN;
+    const url = BASE_URL + routes.API_ATT + routes.LOGIN;
     const payloadData = {
       email: payload.email,
       clave: payload.clave,
@@ -29,10 +29,10 @@ const UserService = {
   },
 
   /**
-   * Request HTTP hacia API de login
+   * Returns the necessary data from the user for the app to work
    */
   async getDatosUsuario() {
-    const url = BASE_URL + routes.GET_DATOS_USUARIO;
+    const url = BASE_URL + routes.API_ATT + routes.GET_USER_DATA;
     try {
       const response = await ApiService.postApi(url);
       return Promise.resolve(response.body.data);

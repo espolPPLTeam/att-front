@@ -1,16 +1,19 @@
 export const BASE_URL = `${process.env.VUE_APP_API_URL}`;
 
 export const routes = {
-  //===== AUTHENTICATION =====//
-  LOGIN: "/api/att/login",
-  GET_DATOS_USUARIO: "/api/att/user/getSessionData",
-  GET_SESSIONS: "/api/att/sesiones",
-  CREATE_SESSION: "/api/att/crearSesion",
-  GET_SESSION_BY_ID: "/api/att/datosSesion",
-  CREATE_STUDENT_QUESTION: "/api/att/crearPreguntaEstudiante",
-  CREATE_PROFESSOR_QUESTION: "/api/att/crearPreguntaProfesor",
-  START_SESSION: "/api/att/iniciarSesion",
-  END_SESSION: "/api/att/terminarSesion",
-  ANSWER_QUESTION: "/api/att/responderPregunta",
-  UPDATE_PROFESSOR_QUESTION_STATUS: "/api/att/professorQuestion/updateStatus",
+  API_ATT: "/api/att",
+  LOGIN: "/login",
+  GET_USER_DATA: "/user/getUserData",
+
+  GET_SESSIONS: "/sessions",
+  GET_SESSION_BY_ID: "/sessions/getSessionData",
+  CREATE_SESSION: "/sessions/createSession",
+  START_SESSION: "/sessions/start",
+  END_SESSION: "/sessions/end",
+
+  CREATE_PROFESSOR_QUESTION: "/questions/createProfessorQuestion",
+  ANSWER_QUESTION: "/questions/answer",
+  UPDATE_PROFESSOR_QUESTION_STATUS: "/questions/updateStatus",
+
+  CREATE_STUDENT_QUESTION: "/questions/createStudentQuestion",
 };

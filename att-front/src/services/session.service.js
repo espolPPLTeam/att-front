@@ -4,13 +4,13 @@ import ApiService from "./api.service";
 
 const SessionService = {
   /**
-   * Request HTTP hacia API de obtenerSesiones
+   * Returns the sessions from the selected course
    *
-   * @param {Object} payload
-   * @param {String} payload.paralelo
+   * @param {object} payload
+   * @param {number} payload.paralelo
    */
   async getSessions(payload) {
-    const url = BASE_URL + routes.GET_SESSIONS;
+    const url = BASE_URL + routes.API_ATT + routes.GET_SESSIONS;
     const queryData = {
       params: {
         paralelo: payload.paralelo
@@ -24,14 +24,14 @@ const SessionService = {
     }
   },
   /**
-   * Request HTTP hacia API de obtenerSesiones
+   * Creates the register of a new session in a course
    *
    * @param {Object} payload
    * @param {string} payload.name
    * @param {number} payload.course
    */
   async createSession(payload) {
-    const url = BASE_URL + routes.CREATE_SESSION;
+    const url = BASE_URL + routes.API_ATT + routes.CREATE_SESSION;
     const payloadData = {
       idParalelo: payload.course,
       nombre: payload.name,
@@ -44,11 +44,12 @@ const SessionService = {
     }
   },
   /**
+   * Returns all the questions from a particular session
    * @param {Object} payload
    * @param {number} payload.id
    */
   async getSessionById(payload) {
-    const url = BASE_URL + routes.GET_SESSION_BY_ID;
+    const url = BASE_URL + routes.API_ATT + routes.GET_SESSION_BY_ID;
     const queryData = {
       params: {
         idSesion: payload.id,
@@ -62,11 +63,12 @@ const SessionService = {
     }
   },
   /**
+   * Starts a PENDING session
    * @param {Object} payload
    * @param {string} payload.id
    */
   async startSession(payload) {
-    const url = BASE_URL + routes.START_SESSION;
+    const url = BASE_URL + routes.API_ATT + routes.START_SESSION;
     const payloadData = {
       idSesion: payload.id,
     };
@@ -78,11 +80,12 @@ const SessionService = {
     }
   },
   /**
+   * Terminates an ACTIVE session
    * @param {Object} payload
    * @param {string} payload.id
    */
   async endSession(payload) {
-    const url = BASE_URL + routes.END_SESSION;
+    const url = BASE_URL + routes.API_ATT + routes.END_SESSION;
     const payloadData = {
       idSesion: payload.id,
     };
