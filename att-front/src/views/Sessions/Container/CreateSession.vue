@@ -17,10 +17,9 @@
         <v-divider></v-divider>
         <v-card-actions>
           <div class="flex-grow-1"></div>
-          <v-btn color="grey" class="underline w-1/5" text @click="dialog = false">Cancelar</v-btn>
+          <v-btn color="grey" class="underline" text @click="dialog = false">Cancelar</v-btn>
           <v-btn
             color="primary"
-            class="w-1/5"
             rounded
             @click="createSession"
             :disabled="!(sessionName && selectedCourse)"
@@ -41,7 +40,10 @@ export default {
   computed: {
     courses() {
       const cursos = this.$store.getters["user/courses"].map(course => {
-        return { text: course.subjectName, value: course.id };
+        return {
+          text: course.subjectName + " - " + course.name,
+          value: course.id
+        };
       });
       return cursos;
     },

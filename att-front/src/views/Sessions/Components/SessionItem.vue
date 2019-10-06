@@ -18,8 +18,8 @@
       <SessionStatus :actualState="actualState" :hasReply="true"></SessionStatus>
     </div>
     <div class="flex flex-row justify-end">
-      <v-card-text>{{this.subject.name}}</v-card-text>
-      <v-card-text class="text-left">{{this.course.name}}</v-card-text>
+      <v-card-text>{{this.subject.name}} - {{this.course.name}}</v-card-text>
+      <!-- <v-card-text class="text-left">{{this.course.name}}</v-card-text> -->
       <v-btn
         class="mx-2 mt-2"
         v-if="actualState.name === 'PENDIENTE'"
