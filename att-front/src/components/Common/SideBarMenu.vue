@@ -3,8 +3,9 @@
     <v-navigation-drawer v-model="drawer" app clipped>
       <v-list dense>
         <v-list-item two-line>
-          <v-list-item-avatar>
-            <img src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png">
+          <v-list-item-avatar color="grey">
+            <!-- <img src="https://www.pngfind.com/pngs/m/610-6104451_image-placeholder-png-user-profile-placeholder-image-png.png"> -->
+            <span class="white--text headline">{{ user.nombres[0] }}{{ user.apellidos[0] }}</span>
           </v-list-item-avatar>
           <v-list-item-content>
             <v-list-item-title class="text-x3">{{ user.nombres }} {{ user.apellidos }}</v-list-item-title>
@@ -65,7 +66,7 @@ export default {
     switchChatRooms(course) {
       const socketPayload = {
         type: "COURSE",
-        id: "",
+        id: ""
       };
       if (this.previousCourse) {
         socketPayload["id"] = this.previousCourse;
@@ -78,7 +79,7 @@ export default {
     logout() {
       const socketPayload = {
         type: "COURSE",
-        id: this.previousCourse,
+        id: this.previousCourse
       };
       this.$store.commit("sockets/leaveChatRoom", socketPayload);
       this.$store.dispatch("user/logout");

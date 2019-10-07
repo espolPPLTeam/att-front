@@ -1,14 +1,8 @@
 <template>
   <Layout>
     <div class="relative w-full h-full">
-      <!-- <div class="w-1/2 mx-auto mt-12 text-xl font-bold text-grey-dark" v-if="isEmpty">
-        Aquí se deberían mostrar todas las secciones.
-        Si ve este mensaje es porque no tiene sessiones o se están cargando x.x
-      </div>-->
-      <!-- <div v-if="!noQuestions"> -->
+      <ChatInput :hasTitle="true" textType="Pregunta" />
       <QuestionList></QuestionList>
-      <!-- </div> -->
-      <ChatInput :hasTitle="true" />
     </div>
   </Layout>
 </template>

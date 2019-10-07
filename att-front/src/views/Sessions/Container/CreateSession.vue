@@ -1,4 +1,3 @@
-
 <template>
   <div class="text-right">
     <v-dialog v-model="dialog" width="500" persistent v-if="user.rol === 'profesor' ">

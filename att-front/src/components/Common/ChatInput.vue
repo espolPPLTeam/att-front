@@ -1,21 +1,43 @@
 
 <template>
-  <div class="fixed w-full pin-b mb-2">
-    <form>
-      <v-container no-gutters>
-        <v-row no-gutters>
-          <v-col sm="12" xs="12" md="8" v-if="user.rol === 'profesor' && this.hasTitle">
-            <v-text-field v-model="title" class="mx-1" outlined label="Título"></v-text-field>
-          </v-col>
-          <v-col sm="12" xs="12" md="9" class="mx-1">
-            <v-text-field v-model="question" outlined label="Pregunta"></v-text-field>
-          </v-col>
-          <v-col sm="12" xs="12" md="2" class="justify-end mt-2 ml-2">
-            <v-btn dark @click="createQuestions" color="primary">Enviar</v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </form>
+  <div class="text-right">
+    <v-dialog
+      v-model="dialog"
+      width="500"
+      persistent
+      v-if="user.rol === 'profesor'"
+      @keydown.esc="dialog = false"
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn color="primary my-2 capitalize" rounded @click="dialog = true">Crear {{textType}}</v-btn>
+      </template>
+      <v-card>
+        <v-card-title class="headline grey darken-4 capitalize" primary-title>Nueva {{textType}}</v-card-title>
+        <v-divider></v-divider>
+        <form>
+          <v-container>
+            <v-text-field
+              v-model="title"
+              placeholder="Título de la pregunta"
+              v-if="user.rol === 'profesor' && this.hasTitle"
+            ></v-text-field>
+            <v-textarea v-model="question" :placeholder="textType"></v-textarea>
+          </v-container>
+        </form>
+        <v-divider></v-divider>
+        <v-card-actions>
+          <div class="flex-grow-1"></div>
+          <v-btn color="grey" class="underline w-1/5" text @click="dialog = false">Cancelar</v-btn>
+          <v-btn
+            color="primary"
+            class="w-1/5"
+            rounded
+            @click="createQuestions"
+            :disabled="!(question)"
+          >Crear</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 <script>
@@ -24,7 +46,8 @@ export default {
   data() {
     return {
       title: "",
-      question: ""
+      question: "",
+      dialog: false
     };
   },
   components: {
@@ -36,10 +59,11 @@ export default {
     }
   },
   props: {
-    hasTitle: Boolean
+    hasTitle: Boolean,
+    textType: String
   },
   methods: {
-    createQuestions() {
+    async createQuestions() {
       if (this.$route.name === "preguntas") {
         if (this.user.rol === "profesor") {
           const payload = {
@@ -47,7 +71,14 @@ export default {
             message: this.question,
             session: this.$route.params.sessionId
           };
-          this.$store.dispatch("questions/createProfessorQuestion", payload);
+          await this.$store.dispatch(
+            "questions/createProfessorQuestion",
+            payload
+          );
+          this.title = "";
+          this.question = "";
+          this.dialog = false;
+          return;
         } else {
           const payload = {
             message: this.question,

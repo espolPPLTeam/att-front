@@ -8,7 +8,7 @@
       <!-- <div v-if="!isEmpty"> -->
       <AnswerList :responses="responses"></AnswerList>
       <!-- </div> -->
-      <ChatInput />
+      <ChatInput :hasTitle="false" textType="respuesta" />
     </div>
   </Layout>
 </template>
