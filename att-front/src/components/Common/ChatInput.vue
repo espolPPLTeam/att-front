@@ -5,7 +5,7 @@
         placeholder="Escribe tu pregunta"
         v-model="question"
         append-outer-icon="mdi-send"
-        @click:append-outer="test"
+        @click:append-outer="createQuestions"
         dense outlined single-line solo rounded
       ></v-text-field>
     </section>
@@ -16,7 +16,8 @@ export default {
   data() {
     return {
       title: "",
-      question: ""
+      question: "",
+      dialog: false
     };
   },
   computed: {
@@ -25,25 +26,13 @@ export default {
     }
   },
   methods: {
-    test() {
-      console.log(123)
-    },
-    createQuestions() {
+    async createQuestions() {
       if (this.$route.name === "preguntas") {
-        if (this.user.rol === "profesor") {
-          const payload = {
-            title: this.title,
-            message: this.question,
-            session: this.$route.params.sessionId
-          };
-          this.$store.dispatch("questions/createProfessorQuestion", payload);
-        } else {
-          const payload = {
-            message: this.question,
-            session: this.$route.params.sessionId
-          };
-          this.$store.dispatch("questions/createStudentQuestion", payload);
-        }
+        const payload = {
+          message: this.question,
+          session: this.$route.params.sessionId
+        };
+        this.$store.dispatch("questions/createStudentQuestion", payload);
       } else {
         const payload = {
           question: this.$route.params.questionId,
