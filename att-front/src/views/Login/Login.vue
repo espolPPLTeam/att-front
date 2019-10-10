@@ -34,14 +34,8 @@
 </template>
 
 <script>
-import Label from "@/components/Common/Label.vue";
-import Input from "@/components/Common/Input.vue";
 export default {
   name: "Login",
-  components: {
-    Label,
-    Input
-  },
   data() {
     return {
       mobile: true,
