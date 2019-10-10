@@ -1,12 +1,12 @@
 <template>
-  <div class="relative max-h-3/5 overflow-y-auto scroll">
-    <div v-for="(question) in this.professorQuestions" :key="'professor - ' + question.id">
+  <main>
+    <section v-for="(question) in this.professorQuestions" :key="'professor - ' + question.id">
       <QuestionItem v-bind="question" :hasReply="true" />
-    </div>
-    <div v-for="(question) in this.studentQuestions" :key="'student-' + question.id">
+    </section>
+    <section v-for="(question) in this.studentQuestions" :key="'student-' + question.id">
       <QuestionItem v-bind="question" />
-    </div>
-  </div>
+    </section>
+  </main>
 </template>
 
 <script>

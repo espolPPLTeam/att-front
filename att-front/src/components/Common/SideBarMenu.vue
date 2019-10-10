@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" app clipped>
+    <v-navigation-drawer v-model="drawer" app clipped temporary>
       <v-list dense>
         <v-list-item two-line>
           <v-list-item-avatar>

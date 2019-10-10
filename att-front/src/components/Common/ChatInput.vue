@@ -1,25 +1,17 @@
-
 <template>
-  <div class="fixed w-full pin-b mb-2">
-    <form>
-      <v-container no-gutters>
-        <v-row no-gutters>
-          <v-col sm="12" xs="12" md="8" v-if="user.rol === 'profesor' && this.hasTitle">
-            <v-text-field v-model="title" class="mx-1" outlined label="Título"></v-text-field>
-          </v-col>
-          <v-col sm="12" xs="12" md="9" class="mx-1">
-            <v-text-field v-model="question" outlined label="Pregunta"></v-text-field>
-          </v-col>
-          <v-col sm="12" xs="12" md="2" class="justify-end mt-2 ml-2">
-            <v-btn dark @click="createQuestions" color="primary">Enviar</v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </form>
-  </div>
+  <footer id="chat-footer">
+    <section id="chat-section">
+      <v-text-field
+        placeholder="Escribe tu pregunta"
+        v-model="question"
+        append-outer-icon="mdi-send"
+        @click:append-outer="test"
+        dense outlined single-line solo rounded
+      ></v-text-field>
+    </section>
+  </footer>
 </template>
 <script>
-import EnterIcon from "../../Icons/EnterIcon.vue";
 export default {
   data() {
     return {
@@ -27,18 +19,15 @@ export default {
       question: ""
     };
   },
-  components: {
-    EnterIcon
-  },
   computed: {
     user() {
       return this.$store.getters["user/user"];
     }
   },
-  props: {
-    hasTitle: Boolean
-  },
   methods: {
+    test() {
+      console.log(123)
+    },
     createQuestions() {
       if (this.$route.name === "preguntas") {
         if (this.user.rol === "profesor") {
@@ -67,8 +56,42 @@ export default {
   }
 };
 </script>
-<style scoped>
-::-webkit-scrollbar {
-  display: none;
-}
+<style lang="scss">
+  #chat-section {
+    .v-text-field__details {
+      display: none;
+    }
+    .v-input__slot {
+      margin-bottom: 0;
+    }
+    text-align: center;
+    margin: auto;
+  }
+  #chat-footer {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    padding: 12px;
+  }
+  @media (min-width: 576px) {
+    #chat-section {
+      max-width: 576px;
+    }
+  }
+  @media (min-width: 768px) {
+    #chat-section {
+      max-width: 768px;
+    }
+  }
+  @media (min-width: 992px) {
+    #chat-section {
+      max-width: 992px;
+    }
+  }
+  @media (min-width: 1200px) {
+    #chat-section {
+      max-width: 1200px;
+    }
+  }
 </style>
