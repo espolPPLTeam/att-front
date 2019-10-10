@@ -1,6 +1,5 @@
 <template>
   <v-chip
-    class="ma-2 mt-4 mr-4 justify-center"
     :color="chipColor"
     outlined
     pill

@@ -1,37 +1,26 @@
 <template>
-  <!-- <div
-    class="min-h-4 bg-white border-b border-grey-lighter relative"
-    :class="{'cursor-pointer hover:shadow-inner': this.state !== 'terminated'}"
-    v-on:click="goToQuestion"
-  >
-    <div class="min-h-4 flex justify-start">
-      <div
-        class="my-auto ml-4 text-lg capitalize"
-        :class="{'text-grey-dark': this.state === 'terminated', 'text-blue': this.state === 'onSession'}"
-      >{{this.nombre}}</div>
-    </div>
-    <div class="flex justify-end text-xs mr-2 text-grey-dark">{{this.date}}</div>
-  </div>-->
   <v-card class="mx-auto my-1" v-on:click="getSessionData">
-    <div class="flex flex-row justify-between">
-      <v-card-title>{{this.name}}</v-card-title>
-      <SessionStatus :actualState="actualState" :hasReply="true"></SessionStatus>
-    </div>
-    <div class="flex flex-row justify-end">
+    <header class="flex flex-row justify-between">
+      <v-card-title>
+        {{ this.name }}
+      </v-card-title>
+      <article class="pt-4 pr-4">
+        <SessionStatus :actualState="actualState" :hasReply="true"></SessionStatus>
+      </article>
+    </header>
+    <main class="flex flex-row justify-end">
       <v-card-text>{{this.subject.name}} - {{this.course.name}}</v-card-text>
-      <!-- <v-card-text class="text-left">{{this.course.name}}</v-card-text> -->
       <v-btn
-        class="mx-2 mt-2"
+        class="mx-2 mt-2 blue darken-2 pr-4"
         v-if="actualState.name === 'PENDIENTE'"
         @click.stop="startSession"
-      >Iniciar sesión</v-btn>
+      >Iniciar</v-btn>
       <v-btn
-        class="mx-2 mt-2"
+        class="mx-2 mt-2 red darken-2 pr-4"
         v-if="actualState.name === 'ACTIVA'"
         @click.stop="endSession"
-      >Acabar sesión</v-btn>
-      <!-- <v-card-text class="text-left">{{this.course.name}}</v-card-text> -->
-    </div>
+      >Terminar</v-btn>
+    </main>
   </v-card>
 </template>
 
@@ -77,7 +66,6 @@ export default {
     },
     startSession() {
       this.$store.dispatch("sessions/startSession", { id: this.id });
-      // startSession
     },
     endSession() {
       this.$store.dispatch("sessions/endSession", { id: this.id });

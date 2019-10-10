@@ -31,6 +31,7 @@ export default {
         type: "SESSION",
         id: "",
         rolId: this.user.rolId,
+        userID: this.user.id,
       };
       if (this.previousSession) {
         socketPayload["id"] = this.previousSession;
