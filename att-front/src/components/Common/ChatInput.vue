@@ -27,12 +27,18 @@ export default {
   },
   methods: {
     async createQuestions() {
+      if (this.question.length < 2) {
+        return;
+      }
       if (this.$route.name === "preguntas") {
         const payload = {
           message: this.question,
           session: this.$route.params.sessionId
         };
-        this.$store.dispatch("questions/createStudentQuestion", payload);
+        await this.$store.dispatch("questions/createStudentQuestion", payload);
+        this.question = "";
+        this.title = "";
+        window.scrollTo(0,document.body.scrollHeight);
       } else {
         const payload = {
           question: this.$route.params.questionId,
