@@ -1,10 +1,18 @@
 <template>
   <main>
-    <section v-for="(question) in this.professorQuestions" :key="'professor - ' + question.id">
-      <QuestionItem v-bind="question" :hasReply="true" />
+    <section
+      v-show="questionType === 'professor'"
+      v-for="(question) in this.professorQuestions"
+      :key="'professor - ' + question.id"
+    >
+      <QuestionItem :question="question" :hasReply="true" :type="'professor'" />
     </section>
-    <section v-for="(question) in this.studentQuestions" :key="'student-' + question.id">
-      <QuestionItem v-bind="question" />
+    <section 
+      v-show="questionType === 'student'" 
+      v-for="(question) in this.studentQuestions" 
+      :key="'student-' + question.id"
+    >
+      <QuestionItem :question="question" :type="'student'" />
     </section>
   </main>
 </template>
@@ -12,6 +20,11 @@
 <script>
 import QuestionItem from "./QuestionItem.vue";
 export default {
+  props: {
+    questionType: {
+      type: String,
+    }
+  },
   computed: {
     professorQuestions() {
       return this.$store.getters["questions/professorQuestions"];

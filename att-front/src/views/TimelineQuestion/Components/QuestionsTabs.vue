@@ -9,10 +9,10 @@
         fixed-tabs 
         @change="onChange">
         <v-tab>
-          <span class="caption">Mis Preguntas</span>
+          <span class="caption">{{ firstTabText }}</span>
         </v-tab>
         <v-tab>
-          <span class="caption">Preguntas del Profesor</span>
+          <span class="caption">{{ secondTabText }}</span>
         </v-tab>
       </v-tabs>
     </main>
@@ -30,6 +30,27 @@ export default {
     activeSession() {
       const sessionId = Number(this.$route.params.sessionId);
       return this.$store.getters["sessions/getSessionById"](sessionId);
+    },
+    user() {
+      return this.$store.getters["user/user"];
+    },
+    firstTabText() {
+      if (this.user.rol === "estudiante") {
+        return "Mis Preguntas";
+      } else if (this.user.rol === "profesor") {
+        return "Preguntas de Estudiantes";
+      } else {
+        return "";
+      }
+    },
+    secondTabText() {
+      if (this.user.rol === "estudiante") {
+        return "Preguntas del Profesor";
+      } else if (this.user.rol === "profesor") {
+        return "Mis Preguntas";
+      } else {
+        return "";
+      }
     }
   }
 };
