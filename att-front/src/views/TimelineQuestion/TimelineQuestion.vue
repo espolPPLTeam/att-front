@@ -52,7 +52,7 @@ export default {
 </script>
 <style>
   #questions-list {
-    margin-top: 42px;
+    margin-top: 82px;
     margin-bottom: 68px;
   }
 </style>
