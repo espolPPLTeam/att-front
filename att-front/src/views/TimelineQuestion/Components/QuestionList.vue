@@ -27,10 +27,18 @@ export default {
   },
   computed: {
     professorQuestions() {
-      return this.$store.getters["questions/professorQuestions"];
+      const questions = this.$store.getters["questions/professorQuestions"];
+      if (this.user.rol === "profesor") {
+        return questions;
+      } else {
+        return questions.filter(question => question.status === "ACTIVA" || question.status === "TERMINADA");
+      }
     },
     studentQuestions() {
       return this.$store.getters["questions/studentQuestions"];
+    },
+    user() {
+      return this.$store.getters["user/user"];
     }
   },
   components: {

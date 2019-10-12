@@ -1,32 +1,48 @@
 <template>
-  <v-card class="mx-auto my-1" max-height="500">
-    <v-card-text
-      class="py-1"
-      v-if="type === 'student' && user.rol === 'profesor'"
-    >
-      <label v-show="!showName" class="mr-3">Anónimo</label>
-      <v-btn text icon v-show="!showName" @click="showName=!showName">
-        <v-icon small>mdi-eye-outline</v-icon>
-      </v-btn>
-      <label v-show="showName" class="mr-3">{{ this.question.user.name }} {{ this.question.user.lastName }}</label>
-      <v-btn text icon v-show="showName" @click="showName=!showName">
-        <v-icon small>mdi-eye-off-outline</v-icon>
-      </v-btn>
+  <v-card class="mx-auto my-1 pointer" max-height="500" @click.native="goToAnswers">
+    <v-card-text class="py-1">
+      <!-- USER-NAME -->
+      <section v-if="type === 'student' && user.rol === 'profesor'">
+        <label v-show="!showName" class="mr-3">Anónimo</label>
+        <v-btn text icon v-show="!showName" @click="showName=!showName">
+          <v-icon small>mdi-eye-outline</v-icon>
+        </v-btn>
+        <label v-show="showName" class="mr-3">{{ question.user.name }} {{ question.user.lastName }}</label>
+        <v-btn text icon v-show="showName" @click="showName=!showName">
+          <v-icon small>mdi-eye-off-outline</v-icon>
+        </v-btn>
+      </section>
+      <!-- /USER-NAME -->
+      <!-- TITLE-STATUS -->
+      <section class="flex flex-row justify-between" v-if="type === 'professor'">
+        <article class="py-2">
+          <h3>{{ question.title }}</h3>
+        </article>
+        <article class="py-2">
+          <QuestionStatus :status="question.status"></QuestionStatus>
+        </article>
+      </section>
+      <!-- /TITLE-STATUS -->
+      <!-- MESSAGE -->
+      <section class="white--text">
+        <p class="text-truncate my-1">{{ question.message }}</p>
+      </section>
+      <!-- /MESSAGE -->
     </v-card-text>
-    <v-card-title v-if="question.title">{{ this.question.title }}</v-card-title>
-    <v-card-text class="white--text">{{ this.question.message }}</v-card-text>
-    <v-card-actions width="100%" v-if="type === 'professor'">
-      <v-flex class="justify-end" v-on:click="goToAnswers">
-        <v-btn text v-if="hasReply">Ver las ({{ this.question.responses.length }}) respuesta(s)</v-btn>
-      </v-flex>
-    </v-card-actions>
-    <v-card-text class="caption py-1 text-end">{{ this.questionDate }}</v-card-text>
+    <footer class="py-1">
+      <v-card-text
+        class="caption py-1"
+        v-if="type === 'professor' && hasReply">
+        {{ question.responses.length }} respuestas - {{ questionDate }}
+      </v-card-text>
+      <v-card-text v-if="type === 'student'" class="caption py-1 text-end">{{ questionDate }}</v-card-text>
+    </footer>
   </v-card>
 </template>
 
 <script>
 import DateTimeUtil from "@/utils/dateTime";
-
+import QuestionStatus from "./QuestionStatus";
 export default {
   data() {
     return {
@@ -86,9 +102,14 @@ export default {
   },
   methods: {
     goToAnswers() {
-      const sessionId = this.$route.params.sessionId;
-      this.$router.push({ path: `/question/${sessionId}/${this.question.id}` });
+      if (this.type === "professor") {
+        const sessionId = this.$route.params.sessionId;
+        this.$router.push({ path: `/question/${sessionId}/${this.question.id}` });
+      }
     }
+  },
+  components: {
+    QuestionStatus,
   }
 };
 </script>

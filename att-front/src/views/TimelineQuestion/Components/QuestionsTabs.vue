@@ -1,7 +1,7 @@
 <template>
   <header id="questions-header">
     <main id="tabs-section">
-      <header class="text-center py-2 text-uppercase" style="background-color: #424242;">
+      <header v-if="activeSession" class="text-center py-2 text-uppercase" style="background-color: #424242;">
         {{ activeSession.name }}
       </header>
       <v-tabs 
