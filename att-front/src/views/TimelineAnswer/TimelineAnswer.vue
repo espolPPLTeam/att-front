@@ -3,7 +3,7 @@
     <div class="relative w-full h-full">
       <AnswerCard></AnswerCard>
       <AnswerList :responses="responses"></AnswerList>
-      <ChatInput></ChatInput>
+      <ChatInput v-if="!chatInputDisabled"></ChatInput>
     </div>
   </Layout>
 </template>
@@ -37,6 +37,24 @@ export default {
     user() {
       return this.$store.getters["user/user"];
     },
+    activeQuestion() {
+      const questionId = Number(this.$route.params.questionId);
+      return this.$store.getters["questions/findProfessorQuestionById"](questionId);
+    },
+    alreadyResponded() {
+      const myResponse = this.activeQuestion.responses.find(response => response.user.id === this.user.id);
+      return (myResponse != null);
+    },
+    chatInputDisabled() {
+      const routeName = this.$route.name;
+      return (
+        (this.user.rol != "estudiante") ||
+        (
+          (this.activeQuestion && this.activeQuestion.status != "ACTIVA") ||
+          this.alreadyResponded
+        )
+      );
+    }
   },
   components: {
     Layout,

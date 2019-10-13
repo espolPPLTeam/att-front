@@ -3,7 +3,7 @@
     <main class="w-full h-full">
       <QuestionsTabs v-on:tabSelected="onTabSelected"></QuestionsTabs>
       <QuestionList id="questions-list" :questionType="questionType"></QuestionList>
-      <ChatInput></ChatInput>
+      <ChatInput v-if="!chatInputDisabled"></ChatInput>
       <ProfessorQuestion v-if="user.rol == 'profesor'"></ProfessorQuestion>
     </main>
   </Layout>
@@ -29,6 +29,18 @@ export default {
   computed: {
     user() {
       return this.$store.getters["user/user"];
+    },
+    activeSession() {
+      const sessionId = Number(this.$route.params.sessionId);
+      return this.$store.getters["sessions/getSessionById"](sessionId);
+    },
+    chatInputDisabled() {
+      const routeName = this.$route.name;
+      return (
+        (this.user.rol != "estudiante") ||
+        !this.activeSession || 
+        (this.activeSession && this.activeSession.actualState.name != "ACTIVA")
+      );
     }
   },
   methods: {
