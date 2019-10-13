@@ -1,5 +1,5 @@
 <template>
-  <footer id="chat-footer">
+  <footer id="chat-footer" v-if="!chatInputDisabled">
     <section id="chat-section">
       <v-text-field
         placeholder="Escribe tu pregunta"
@@ -23,6 +23,25 @@ export default {
   computed: {
     user() {
       return this.$store.getters["user/user"];
+    },
+    activeSession() {
+      const sessionId = Number(this.$route.params.sessionId);
+      const activeSession = this.$store.getters["sessions/getSessionById"](sessionId);
+      return activeSession
+    },
+    activeQuestion() {
+      const questionId = Number(this.$route.params.questionId);
+      const professorQuestion = this.$store.getters["questions/findProfessorQuestionById"](questionId);
+      return professorQuestion;
+    },
+    chatInputDisabled() {
+      const routeName = this.$route.name;
+      return (
+        (this.user.rol != "estudiante") ||
+        !this.activeSession || 
+        (this.activeSession && this.activeSession.actualState.name != "ACTIVA") ||
+        (routeName === "Respuestas" && this.activeQuestion && this.activeQuestion.status != "ACTIVA")
+      );
     }
   },
   methods: {

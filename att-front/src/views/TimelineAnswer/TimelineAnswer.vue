@@ -1,14 +1,9 @@
 <template>
   <Layout>
     <div class="relative w-full h-full">
-      <!-- <div class="w-1/2 mx-auto mt-12 text-xl font-bold text-grey-dark" v-if="isEmpty">
-        Aquí se deberían mostrar todas las respuestas.
-        Si ve este mensaje es porque no tiene respuestas o se están cargando x.x
-      </div>-->
-      <!-- <div v-if="!isEmpty"> -->
+      <AnswerCard></AnswerCard>
       <AnswerList :responses="responses"></AnswerList>
-      <!-- </div> -->
-      <ChatInput :hasTitle="false" textType="respuesta" />
+      <ChatInput></ChatInput>
     </div>
   </Layout>
 </template>
@@ -17,8 +12,8 @@
 import Layout from "../../components/Common/Layout.vue";
 import ChatInput from "../../components/Common/ChatInput.vue";
 import AnswerList from "./Components/AnswerList.vue";
-
 import isEmpty from "lodash/isEmpty";
+import AnswerCard from "./Components/AnswerCard";
 
 export default {
   data() {
@@ -38,12 +33,16 @@ export default {
         });
         return selectedQuestion.responses;
       }
-    }
+    },
+    user() {
+      return this.$store.getters["user/user"];
+    },
   },
   components: {
     Layout,
     AnswerList,
-    ChatInput
+    ChatInput,
+    AnswerCard,
   },
   mounted() {
     const sessionId = this.$route.params.sessionId;

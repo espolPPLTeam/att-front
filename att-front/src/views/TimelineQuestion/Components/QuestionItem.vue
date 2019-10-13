@@ -56,6 +56,10 @@ export default {
     },
     questionDate() {
       return DateTimeUtil.timeFromDate(this.question.createdAt);
+    },
+    activeSession() {
+      const sessionId = Number(this.$route.params.sessionId);
+      return this.$store.getters["sessions/getSessionById"](sessionId);
     }
   },
   props: {
@@ -105,6 +109,11 @@ export default {
       if (this.type === "professor") {
         const sessionId = this.$route.params.sessionId;
         this.$router.push({ path: `/question/${sessionId}/${this.question.id}` });
+      } else if (this.type === "student") {
+        if (this.activeSession && this.activeSession.actualState.name === "ACTIVA") {
+          const sessionId = this.$route.params.sessionId;
+          this.$router.push({ path: `/question/${sessionId}/${this.question.id}` });
+        }
       }
     }
   },
