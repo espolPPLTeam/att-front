@@ -1,31 +1,50 @@
 <template>
-  <!-- <div class="min-h-4 bg-white border-b border-grey-lighter relative flex flex-col justify-between">
-    <div class="flex justify-start flex-col items-start my-auto">
-      <div
-        class="ml-4 text-xs capitalize text-justify max-h-16 flex-wrap overflow-y-auto py-1 px-4"
-        id="pruebas"
-      >{{this.message}}</div>
-  </div>-->
-  <!-- <div class="flex justify-end text-xs mr-2 text-grey-dark flex-col">
-      <div class="flex justify-end mr-2 mb-1">{{this.date}}</div>
-  </div>
-  </div>-->
-  <v-card class="mx-auto my-1" max-height="500">
-    <v-card-text>{{this.message}}</v-card-text>
+  <v-card class="mx-auto my-1 pointer" max-height="500">
+    <v-card-text class="py-1">
+      <!-- USER-NAME -->
+      <section v-if="user.rol === 'profesor'">
+        <label v-show="!showName" class="mr-3">Anónimo</label>
+        <v-btn text icon v-show="!showName" @click="showName=!showName">
+          <v-icon small>mdi-eye-outline</v-icon>
+        </v-btn>
+        <label v-show="showName" class="mr-3">{{ answer.user.name }} {{ answer.user.lastName }}</label>
+        <v-btn text icon v-show="showName" @click="showName=!showName">
+          <v-icon small>mdi-eye-off-outline</v-icon>
+        </v-btn>
+      </section>
+      <!-- /USER-NAME -->
+      <!-- MESSAGE -->
+      <section class="white--text">
+        <p class="text-truncate my-1">{{ answer.message }}</p>
+      </section>
+      <!-- /MESSAGE -->
+    </v-card-text>
+    <footer class="py-1">
+      <v-card-text class="caption py-1 text-end">{{ answerDate }}</v-card-text>
+    </footer>
   </v-card>
 </template>
 
 <script>
+import DateTimeUtil from "@/utils/dateTime";
 export default {
   data() {
     return {
-      onSessionStyle: "text-blue"
+      onSessionStyle: "text-blue",
+      showName: false,
     };
   },
   props: {
-    message: String,
-    date: String
-  }
+    answer: Object,
+  },
+  computed: {
+    user() {
+      return this.$store.getters["user/user"];
+    },
+    answerDate() {
+      return DateTimeUtil.timeFromDate(this.answer.createdAt);
+    },
+  },
 };
 </script>
 <style scoped>

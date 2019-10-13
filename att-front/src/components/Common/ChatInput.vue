@@ -34,13 +34,22 @@ export default {
       const professorQuestion = this.$store.getters["questions/findProfessorQuestionById"](questionId);
       return professorQuestion;
     },
+    alreadyResponded() {
+      const myResponse = this.activeQuestion.responses.find(response => response.user.id === this.user.id);
+      return (myResponse != null);
+    },
     chatInputDisabled() {
       const routeName = this.$route.name;
       return (
         (this.user.rol != "estudiante") ||
         !this.activeSession || 
         (this.activeSession && this.activeSession.actualState.name != "ACTIVA") ||
-        (routeName === "Respuestas" && this.activeQuestion && this.activeQuestion.status != "ACTIVA")
+        (routeName === "Respuestas" && 
+          (
+            this.activeQuestion && this.activeQuestion.status != "ACTIVA" ||
+            this.alreadyResponded
+          )
+        )
       );
     }
   },
