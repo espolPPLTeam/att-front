@@ -24,7 +24,7 @@ export default {
     QuestionList,
     ChatInput,
     ProfessorQuestion,
-    QuestionsTabs,
+    QuestionsTabs
   },
   computed: {
     user() {
@@ -37,8 +37,8 @@ export default {
     chatInputDisabled() {
       const routeName = this.$route.name;
       return (
-        (this.user.rol != "estudiante") ||
-        !this.activeSession || 
+        this.user.rol != "estudiante" ||
+        !this.activeSession ||
         (this.activeSession && this.activeSession.actualState.name != "ACTIVA")
       );
     }
@@ -50,7 +50,7 @@ export default {
   },
   data() {
     return {
-      questionType: "student",
+      questionType: "student"
     };
   },
   mounted() {
@@ -62,9 +62,3 @@ export default {
   }
 };
 </script>
-<style>
-  #questions-list {
-    margin-top: 82px;
-    margin-bottom: 68px;
-  }
-</style>

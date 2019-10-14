@@ -7,9 +7,9 @@
     >
       <QuestionItem :question="question" :hasReply="true" :type="'professor'" />
     </section>
-    <section 
-      v-show="questionType === 'student'" 
-      v-for="(question) in this.studentQuestions" 
+    <section
+      v-show="questionType === 'student'"
+      v-for="(question) in this.studentQuestions"
       :key="'student-' + question.id"
     >
       <QuestionItem :question="question" :type="'student'" />
@@ -22,7 +22,7 @@ import QuestionItem from "./QuestionItem.vue";
 export default {
   props: {
     questionType: {
-      type: String,
+      type: String
     }
   },
   computed: {
@@ -31,7 +31,10 @@ export default {
       if (this.user.rol === "profesor") {
         return questions;
       } else {
-        return questions.filter(question => question.status === "ACTIVA" || question.status === "TERMINADA");
+        return questions.filter(
+          question =>
+            question.status === "ACTIVA" || question.status === "TERMINADA"
+        );
       }
     },
     studentQuestions() {

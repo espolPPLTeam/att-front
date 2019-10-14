@@ -1,9 +1,7 @@
 <template>
   <v-card class="mx-auto my-1" v-on:click="getSessionData">
     <header class="flex flex-row justify-between">
-      <v-card-title>
-        {{ this.name }}
-      </v-card-title>
+      <v-card-title>{{ this.name }}</v-card-title>
       <article class="pt-4 pr-4">
         <SessionStatus :actualState="actualState" :hasReply="true"></SessionStatus>
       </article>
@@ -11,12 +9,12 @@
     <main class="flex flex-row justify-end">
       <v-card-text>{{this.subject.name}} - {{this.course.name}}</v-card-text>
       <v-btn
-        class="mx-2 mt-2 blue darken-2 pr-4"
+        class="mx-2 mt-2 blue darken-2 pr-4 w-1/8"
         v-if="actualState.name === 'PENDIENTE'"
         @click.stop="startSession"
       >Iniciar</v-btn>
       <v-btn
-        class="mx-2 mt-2 red darken-2 pr-4"
+        class="mx-2 mt-2 red darken-4 pr-4 w-1/8"
         v-if="actualState.name === 'ACTIVA'"
         @click.stop="endSession"
       >Terminar</v-btn>

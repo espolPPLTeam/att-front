@@ -1,13 +1,12 @@
 <template>
   <header id="questions-header">
-    <main id="tabs-section">
-      <header v-if="activeSession" class="text-center py-2 text-uppercase" style="background-color: #424242;">
-        {{ activeSession.name }}
-      </header>
-      <v-tabs 
-        height="42" 
-        fixed-tabs 
-        @change="onChange">
+    <main id="tabs-section" class="w-full">
+      <header
+        v-if="activeSession"
+        class="text-center py-4 text-uppercase"
+        style="background-color: #424242;"
+      >{{ activeSession.name }}</header>
+      <v-tabs fixed-tabs @change="onChange">
         <v-tab>
           <span class="caption">{{ firstTabText }}</span>
         </v-tab>
@@ -22,7 +21,7 @@
 export default {
   methods: {
     onChange(val) {
-      const tab = (val === 0) ? "student" : "professor";
+      const tab = val === 0 ? "student" : "professor";
       this.$emit("tabSelected", tab);
     }
   },
@@ -56,34 +55,34 @@ export default {
 };
 </script>
 <style lang="scss">
-  #questions-header {
-    top: 48px;
-    left: 0;
-    position: fixed;
-    width: 100%;
-    z-index: 1;
-  }
-  #tabs-section {
-    margin: auto;
-  }
-  @media (min-width: 576px) {
-    #tabs-section {
-      max-width: 576px;
-    }
-  }
-  @media (min-width: 768px) {
-    #tabs-section {
-      max-width: 768px;
-    }
-  }
-  @media (min-width: 992px) {
-    #tabs-section {
-      max-width: 992px;
-    }
-  }
-  @media (min-width: 1200px) {
-    #tabs-section {
-      max-width: 1200px;
-    }
-  }
+// #questions-header {
+//   top: 48px;
+//   left: 0;
+//   position: fixed;
+//   width: 100%;
+//   z-index: 1;
+// }
+// #tabs-section {
+//   margin: auto;
+// }
+// @media (min-width: 576px) {
+//   #tabs-section {
+//     max-width: 576px;
+//   }
+// }
+// @media (min-width: 768px) {
+//   #tabs-section {
+//     max-width: 768px;
+//   }
+// }
+// @media (min-width: 992px) {
+//   #tabs-section {
+//     max-width: 992px;
+//   }
+// }
+// @media (min-width: 1200px) {
+//   #tabs-section {
+//     max-width: 1200px;
+//   }
+// }
 </style>
