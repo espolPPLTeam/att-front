@@ -92,7 +92,7 @@ export function addProfessorQuestion(state, question) {
 }
 
 export function addAnswerToQuestion(state, payload) {
-  const question = state.professorQuestions.find(question => question.id === payload.question);
+  const question = state.professorQuestions.find(question => question.id === Number(payload.question));
   if (question) {
     question.responses.push({
       id: payload.id,

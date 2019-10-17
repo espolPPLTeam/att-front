@@ -30,6 +30,10 @@ export default {
     }
   },
   methods: {
+    clearInput() {
+      this.question = "";
+      this.title = "";
+    },
     async createQuestions() {
       if (this.question.length < 2) {
         return;
@@ -40,16 +44,16 @@ export default {
           session: this.$route.params.sessionId
         };
         await this.$store.dispatch("questions/createStudentQuestion", payload);
-        this.question = "";
-        this.title = "";
+        this.clearInput();
         window.scrollTo(0, document.body.scrollHeight);
       } else {
         const payload = {
           question: this.$route.params.questionId,
           message: this.question
         };
-        this.$store.dispatch("questions/answerQuestion", payload);
-        this.$store.getters["questions/professorQuestions"];
+        await this.$store.dispatch("questions/answerQuestion", payload);
+        this.clearInput();
+        window.scrollTo(0, document.body.scrollHeight);
       }
     }
   }
