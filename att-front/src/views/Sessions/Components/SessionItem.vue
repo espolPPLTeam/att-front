@@ -10,12 +10,12 @@
       <v-card-text>{{this.subject.name}} - {{this.course.name}}</v-card-text>
       <v-btn
         class="mx-2 mt-2 blue darken-2 pr-4 w-1/8"
-        v-if="actualState.name === 'PENDIENTE'"
+        v-if="actualState.name === 'PENDIENTE' && isProfessor"
         @click.stop="startSession"
       >Iniciar</v-btn>
       <v-btn
         class="mx-2 mt-2 red darken-4 pr-4 w-1/8"
-        v-if="actualState.name === 'ACTIVA'"
+        v-if="actualState.name === 'ACTIVA' && isProfessor"
         @click.stop="endSession"
       >Terminar</v-btn>
     </main>
@@ -40,6 +40,9 @@ export default {
   computed: {
     user() {
       return this.$store.getters["user/user"];
+    },
+    isProfessor() {
+      return toLower(this.user.rol) === "profesor";
     }
   },
   props: {

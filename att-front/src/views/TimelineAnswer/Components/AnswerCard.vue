@@ -3,7 +3,7 @@
     <v-card v-if="question">
       <v-card-title>
         <v-container grid-list-xl>
-          <v-layout row justify-space-between>
+          <v-layout row justify-space-between v-if="question.title">
             <v-flex md10 xs12>
               <p class="my-auto">{{ question.title || "N/A" }}</p>
             </v-flex>
@@ -23,6 +23,8 @@
 </template>
 <script>
 import QuestionStatus from "../../TimelineQuestion/Components/QuestionStatus";
+import isEmpty from "lodash/isEmpty";
+
 export default {
   components: {
     QuestionStatus
@@ -30,9 +32,15 @@ export default {
   computed: {
     question() {
       const questionId = Number(this.$route.params.questionId);
-      return this.$store.getters["questions/findProfessorQuestionById"](
+      let question = this.$store.getters["questions/findProfessorQuestionById"](
         questionId
       );
+      if (isEmpty(question)) {
+        question = this.$store.getters["questions/findStudentQuestionById"](
+          questionId
+        );
+      }
+      return question;
     }
   }
 };

@@ -32,9 +32,8 @@
     <footer class="py-1">
       <v-card-text
         class="caption py-1"
-        v-if="type === 'professor' && hasReply">
-        {{ question.responses.length }} respuestas - {{ questionDate }}
-      </v-card-text>
+        v-if="type === 'professor' && hasReply"
+      >{{ question.responses.length }} respuestas - {{ questionDate }}</v-card-text>
       <v-card-text v-if="type === 'student'" class="caption py-1 text-end">{{ questionDate }}</v-card-text>
     </footer>
   </v-card>
@@ -47,7 +46,7 @@ export default {
   data() {
     return {
       onSessionStyle: "text-blue",
-      showName: false,
+      showName: false
     };
   },
   computed: {
@@ -69,56 +68,63 @@ export default {
       },
       message: {
         type: String,
-        required: true,
+        required: true
       },
       createdAt: {
         type: [String, Date],
-        required: true,
+        required: true
       },
       id: {
-        type: Number,
+        type: Number
       },
       user: {
         name: {
           type: String,
-          required: true,
+          required: true
         },
         lastName: {
           type: String,
-          required: true,
+          required: true
         },
         email: {
           type: String,
-          required: true,
+          required: true
         },
         id: {
           type: Number,
-          required: true,
+          required: true
         }
       },
-      responses: Array,
+      responses: Array
     },
     hasReply: Boolean,
     type: {
       type: String,
-      required: true,
+      required: true
     }
   },
   methods: {
     goToAnswers() {
       if (this.type === "professor") {
         const sessionId = this.$route.params.sessionId;
-        this.$router.push({ path: `/question/${sessionId}/${this.question.id}` });
+        this.$router.push({
+          path: `/question/${sessionId}/${this.question.id}`
+        });
       } else if (this.type === "student") {
-        if (this.activeSession && this.activeSession.actualState.name === "ACTIVA") {
+        if (
+          this.activeSession &&
+          this.activeSession.actualState.name === "ACTIVA"
+        ) {
           const sessionId = this.$route.params.sessionId;
-          this.$router.push({ path: `/question/${sessionId}/${this.question.id}` });
+          this.$router.push({
+            path: `/question/${sessionId}/${this.question.id}`
+          });
         }
       }
     }
   },
   components: {
-    QuestionStatus,
+    QuestionStatus
   }
 };
 </script>

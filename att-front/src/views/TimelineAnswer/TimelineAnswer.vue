@@ -25,12 +25,20 @@ export default {
     professorQuestions() {
       return this.$store.getters["questions/professorQuestions"];
     },
+    studentQuestions() {
+      return this.$store.getters["questions/studentQuestions"];
+    },
     responses() {
       if (!isEmpty(this.professorQuestions)) {
         const questionId = this.$route.params.questionId;
-        const selectedQuestion = this.professorQuestions.find(question => {
+        let selectedQuestion = this.professorQuestions.find(question => {
           return parseInt(question.id, 10) === parseInt(questionId, 10);
         });
+        if (isEmpty(selectedQuestion)) {
+          selectedQuestion = this.studentQuestions.find(question => {
+            return parseInt(question.id, 10) === parseInt(questionId, 10);
+          });
+        }
         return selectedQuestion.responses;
       }
     },
@@ -39,20 +47,26 @@ export default {
     },
     activeQuestion() {
       const questionId = Number(this.$route.params.questionId);
-      return this.$store.getters["questions/findProfessorQuestionById"](questionId);
+      return this.$store.getters["questions/findProfessorQuestionById"](
+        questionId
+      );
     },
     alreadyResponded() {
-      const myResponse = this.activeQuestion.responses.find(response => response.user.id === this.user.id);
-      return (myResponse != null);
+      try {
+        const myResponse = this.activeQuestion.responses.find(
+          response => response.user.id === this.user.id
+        );
+        return myResponse != null;
+      } catch (error) {
+        return null;
+      }
     },
     chatInputDisabled() {
       const routeName = this.$route.name;
       return (
-        (this.user.rol != "estudiante") ||
-        (
-          (this.activeQuestion && this.activeQuestion.status != "ACTIVA") ||
-          this.alreadyResponded
-        )
+        this.user.rol != "estudiante" ||
+        ((this.activeQuestion && this.activeQuestion.status != "ACTIVA") ||
+          this.alreadyResponded)
       );
     }
   },
@@ -60,7 +74,7 @@ export default {
     Layout,
     AnswerList,
     ChatInput,
-    AnswerCard,
+    AnswerCard
   },
   mounted() {
     const sessionId = this.$route.params.sessionId;
