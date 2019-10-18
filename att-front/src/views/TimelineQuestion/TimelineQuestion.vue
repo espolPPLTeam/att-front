@@ -62,3 +62,9 @@ export default {
   }
 };
 </script>
+<style>
+  #questions-list {
+    margin-top: 104px;
+    margin-bottom: 68px;
+  }
+</style>

@@ -110,16 +110,17 @@ export default {
         this.$router.push({
           path: `/question/${sessionId}/${this.type}/${this.question.id}`
         });
-      } else if (this.type === "student") {
-        if (
-          this.activeSession &&
-          this.activeSession.actualState.name === "ACTIVA"
-        ) {
-          const sessionId = this.$route.params.sessionId;
-          this.$router.push({
-            path: `/question/${sessionId}/${this.type}/${this.question.id}`
-          });
-        }
+      // } else if (this.type === "student") {
+      //   if (
+      //     this.activeSession &&
+      //     this.activeSession.actualState.name === "ACTIVA"
+      //   ) {
+      //     const sessionId = this.$route.params.sessionId;
+      //     this.$router.push({
+      //       path: `/question/${sessionId}/${this.type}/${this.question.id}`
+      //     });
+      //   }
+      // }
       }
     }
   },

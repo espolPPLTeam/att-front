@@ -3,14 +3,16 @@
     <main id="tabs-section" class="w-full">
       <header
         v-if="activeSession"
-        class="text-center py-4 text-uppercase flex flex-col"
+        class="text-center py-1 text-uppercase flex flex-col"
         style="background-color: #424242;"
       >
         <div
-          class="bg-transparent underline capitalize w-1/6 ml-4 cursor-pointer text-grey hover:text-white"
+          class="bg-transparent w-1/6 ml-4 cursor-pointer text-grey hover:text-white"
           rounded
           @click="goToSession"
-        >Regresar</div>
+        >
+          <v-icon>mdi-arrow-left</v-icon>
+        </div>
         <div class="my-auto">{{ activeSession.name }}</div>
       </header>
       <v-tabs fixed-tabs @change="onChange">
@@ -67,34 +69,34 @@ export default {
 };
 </script>
 <style lang="scss">
-// #questions-header {
-//   top: 48px;
-//   left: 0;
-//   position: fixed;
-//   width: 100%;
-//   z-index: 1;
-// }
-// #tabs-section {
-//   margin: auto;
-// }
-// @media (min-width: 576px) {
-//   #tabs-section {
-//     max-width: 576px;
-//   }
-// }
-// @media (min-width: 768px) {
-//   #tabs-section {
-//     max-width: 768px;
-//   }
-// }
-// @media (min-width: 992px) {
-//   #tabs-section {
-//     max-width: 992px;
-//   }
-// }
-// @media (min-width: 1200px) {
-//   #tabs-section {
-//     max-width: 1200px;
-//   }
-// }
+#questions-header {
+  top: 48px;
+  left: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+}
+#tabs-section {
+  margin: auto;
+}
+@media (min-width: 576px) {
+  #tabs-section {
+    max-width: 576px;
+  }
+}
+@media (min-width: 768px) {
+  #tabs-section {
+    max-width: 768px;
+  }
+}
+@media (min-width: 992px) {
+  #tabs-section {
+    max-width: 992px;
+  }
+}
+@media (min-width: 1200px) {
+  #tabs-section {
+    max-width: 1200px;
+  }
+}
 </style>
