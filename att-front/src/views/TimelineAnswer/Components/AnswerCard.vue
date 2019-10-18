@@ -10,6 +10,14 @@
             <v-flex md2 xs6 offset-md0 offset-xs4>
               <QuestionStatus :status="question.status" class="mr-auto"></QuestionStatus>
             </v-flex>
+            <v-flex xs2 offset-xs5 v-if="user.rol === 'profesor'">
+              <v-btn text icon v-if="question.status === 'INACTIVA'" @click.native="updateQuestionStatus('ACTIVA')">
+                <v-icon large>mdi-play</v-icon>
+              </v-btn>
+              <v-btn text icon v-if="question.status === 'ACTIVA'" @click.native="updateQuestionStatus('TERMINADA')">
+                <v-icon large>mdi-stop</v-icon>
+              </v-btn>
+            </v-flex>
           </v-layout>
         </v-container>
       </v-card-title>
@@ -30,6 +38,9 @@ export default {
     QuestionStatus
   },
   computed: {
+    user() {
+      return this.$store.getters["user/user"];
+    },
     question() {
       const questionId = Number(this.$route.params.questionId);
       let question = this.$store.getters["questions/findProfessorQuestionById"](
@@ -41,6 +52,15 @@ export default {
         );
       }
       return question;
+    }
+  },
+  methods: {
+    updateQuestionStatus(status) {
+      const payload = {
+        status,
+        question: this.question.id,
+      };
+      this.$store.dispatch("questions/updateProfessorQuestionStatus", payload);
     }
   }
 };
