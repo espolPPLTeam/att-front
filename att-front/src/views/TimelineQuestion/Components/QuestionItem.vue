@@ -108,7 +108,7 @@ export default {
       if (this.type === "professor") {
         const sessionId = this.$route.params.sessionId;
         this.$router.push({
-          path: `/question/${sessionId}/${this.question.id}`
+          path: `/question/${sessionId}/${this.type}/${this.question.id}`
         });
       } else if (this.type === "student") {
         if (
@@ -117,7 +117,7 @@ export default {
         ) {
           const sessionId = this.$route.params.sessionId;
           this.$router.push({
-            path: `/question/${sessionId}/${this.question.id}`
+            path: `/question/${sessionId}/${this.type}/${this.question.id}`
           });
         }
       }

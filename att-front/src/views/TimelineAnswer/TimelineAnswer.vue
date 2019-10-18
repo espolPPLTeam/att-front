@@ -1,6 +1,11 @@
 <template>
   <Layout>
     <div class="relative w-full h-full">
+      <div
+        class="bg-transparent underline capitalize w-1/6 ml-4 cursor-pointer text-grey hover:text-white my-2"
+        rounded
+        @click="goToSession"
+      >Regresar</div>
       <AnswerCard></AnswerCard>
       <AnswerList :responses="responses"></AnswerList>
       <ChatInput v-if="!chatInputDisabled"></ChatInput>
@@ -14,6 +19,7 @@ import ChatInput from "../../components/Common/ChatInput.vue";
 import AnswerList from "./Components/AnswerList.vue";
 import isEmpty from "lodash/isEmpty";
 import AnswerCard from "./Components/AnswerCard";
+import toLower from "lodash/toLower";
 
 export default {
   data() {
@@ -29,15 +35,22 @@ export default {
       return this.$store.getters["questions/studentQuestions"];
     },
     responses() {
-      if (!isEmpty(this.professorQuestions)) {
-        const questionId = this.$route.params.questionId;
-        let selectedQuestion = this.professorQuestions.find(question => {
-          return parseInt(question.id, 10) === parseInt(questionId, 10);
-        });
-        if (isEmpty(selectedQuestion)) {
-          selectedQuestion = this.studentQuestions.find(question => {
+      const type = this.$route.params.type;
+      let selectedQuestion;
+      if (toLower(type) === "professor") {
+        if (!isEmpty(this.professorQuestions)) {
+          const questionId = this.$route.params.questionId;
+          selectedQuestion = this.professorQuestions.find(question => {
             return parseInt(question.id, 10) === parseInt(questionId, 10);
           });
+        } else {
+          if (!isEmpty(this.studentQuestions)) {
+            if (isEmpty(selectedQuestion)) {
+              selectedQuestion = this.studentQuestions.find(question => {
+                return parseInt(question.id, 10) === parseInt(questionId, 10);
+              });
+            }
+          }
         }
         return selectedQuestion.responses;
       }
@@ -82,6 +95,14 @@ export default {
     // If user refresh web page, then take id from url.
     if (isEmpty(this.professorQuestions)) {
       this.$store.dispatch("sessions/getSessionById", { id: sessionId });
+    }
+  },
+  methods: {
+    goToSession() {
+      const sessionId = this.$route.params.sessionId;
+      this.$router.push({
+        path: `/session/${sessionId}`
+      });
     }
   }
 };

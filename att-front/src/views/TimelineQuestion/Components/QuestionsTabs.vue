@@ -3,9 +3,16 @@
     <main id="tabs-section" class="w-full">
       <header
         v-if="activeSession"
-        class="text-center py-4 text-uppercase"
+        class="text-center py-4 text-uppercase flex flex-col"
         style="background-color: #424242;"
-      >{{ activeSession.name }}</header>
+      >
+        <div
+          class="bg-transparent underline capitalize w-1/6 ml-4 cursor-pointer text-grey hover:text-white"
+          rounded
+          @click="goToSession"
+        >Regresar</div>
+        <div class="my-auto">{{ activeSession.name }}</div>
+      </header>
       <v-tabs fixed-tabs @change="onChange">
         <v-tab>
           <span class="caption">{{ firstTabText }}</span>
@@ -23,6 +30,11 @@ export default {
     onChange(val) {
       const tab = val === 0 ? "student" : "professor";
       this.$emit("tabSelected", tab);
+    },
+    goToSession() {
+      this.$router.push({
+        path: `/`
+      });
     }
   },
   computed: {
